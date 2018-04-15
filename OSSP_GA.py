@@ -52,12 +52,17 @@ def parse_problem(filename, k=1):
     # We return the zipped data to rotate the rows and columns, making each
     #  item in data the durations of tasks for a particular job
     return zip(*data)
+
 filename = 'instances/tai20_5.txt'
-processing_times = parse_problem(filename, 1)
+processing_times = parse_problem(filename, 1) # a list of [job number] [machine number]
 numberOfJobs = len(processing_times)
 numberOfMachines = len(processing_times[0])
 NDIM = numberOfMachines * numberOfJobs
-print(NDIM)
+# print(processing_times)
+
+operation_numbers_dictionary = { i:(i % numberOfMachines, i // numberOfMachines) for i in range(NDIM)}
+# print(operation_numbers_dictionary)
+
 # define the problem as an Minimization or Maximization by defining the weights
 creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
 
@@ -71,9 +76,16 @@ toolbox.register("population", tools.initRepeat, list, toolbox.individual)  # re
 
 
 # Define Objective Function
-def make_span(individual):
-   pass
-
+def make_span(schedule):
+    for operation in schedule:
+        # print(operation)
+        machine_number = operation_numbers_dictionary[operation][0]
+        # print(machine_number)
+        job_number = operation_numbers_dictionary[operation][1]
+        # print(job_number)
+        p_time = processing_times[job_number] [machine_number]
+        # print("Processing time for job {} on machine {} : ".format(job_number, machine_number), p_time)
+    return 0
 
 def fitnessdiversity(population):
     """
@@ -144,7 +156,6 @@ toolbox.register("select", tools.selTournament, tournsize=2)
 def main():
     # random.seed(169)
     pop = toolbox.population(n=NPOP)
-    print(pop)
     hof = tools.HallOfFame(1)
 
     stats = tools.Statistics(key=lambda ind: ind.fitness.values)
