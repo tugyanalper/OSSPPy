@@ -3,27 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="4b1dbf32-9499-41bb-934f-78381e5742fe" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai20_5.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai20_5.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai20_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai20_20.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/best_lb_up.txt" afterPath="$PROJECT_DIR$/instances/Openshop/best_lb_up.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai50_10.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai50_10.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai5_5.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai5_5.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai100_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai100_20.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai50_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai50_20.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai100_10.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai100_10.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai200_10.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai200_10.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai20_20.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai20_20.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai50_5.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai50_5.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai500_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai500_20.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai100_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai100_20.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai100_5.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai100_5.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scratchpad.py" afterPath="$PROJECT_DIR$/scratchpad.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSSP_GA.py" afterPath="$PROJECT_DIR$/OSSP_GA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai15_15.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai15_15.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai200_10.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai200_10.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai200_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai200_20.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai10_10.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai10_10.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai4_4.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai4_4.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai7_7.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai7_7.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai20_10.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai20_10.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai20_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai20_20.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai20_5.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai20_5.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai500_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai500_20.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai50_10.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai50_10.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai50_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai50_20.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai50_5.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai50_5.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/best_lb_up.txt" afterPath="$PROJECT_DIR$/instances/Openshop/best_lb_up.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai10_10.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai10_10.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai15_15.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai15_15.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai20_20.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai20_20.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai4_4.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai4_4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai5_5.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai5_5.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai7_7.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai7_7.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -302,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525165822165</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Openshop Problemleri indirildi ve makespan yazıldı. Makespan plotlayan betik yazıldı.">
+      <created>1525448284482</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1525448284482</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -316,7 +321,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1239" height="697" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2654424" sideWeight="0.49237472" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31687897" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
