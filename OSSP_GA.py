@@ -4,13 +4,14 @@ import array
 import random
 import sys
 
+import matplotlib.patches as mpatch
 import matplotlib.pyplot as plt
 import numpy as np
 from deap import base
 from deap import creator
 from deap import tools
 
-NGEN = 1000
+NGEN = 100
 NPOP = 100
 CXPB = 0.9
 MUTPB = 0.01
@@ -83,7 +84,7 @@ def gannt_chart(schedule):
     gantt_chart = [[] for _ in range(numberOfMachines)]
 
     for operation in schedule:
-        fInProcess = False
+        fProcessedBefore = False
         machine_number = operation_numbers_dictionary[operation][0]
         job_number = operation_numbers_dictionary[operation][1]
         proc_time = processing_times[job_number][machine_number]
@@ -91,13 +92,19 @@ def gannt_chart(schedule):
         # check if this job is being processed in any other machine
         completion_time_list = []
         for machine in range(numberOfMachines):
+            # dont check the machine to be scheduled since one job can be scheduled only once.
+            # Check other machines
             if machine != machine_number:
+                # check if the other machines had operations scheduled before
                 if len(gantt_chart[machine]) != 0:
                     for j in range(len(gantt_chart[machine])):
+                        # check the  job numbers on other machines
+                        # and determine if the machine processed an operation of the job
+                        # to be scheduled now
                         if gantt_chart[machine][j][0] == job_number:
-                            # put completion times of job on other machines into a list
+                            # put completion times of the job on other machines into a list
                             completion_time_list.append(gantt_chart[machine][j][-1])
-                            fInProcess = True
+                            fProcessedBefore = True
 
         # determine the maximum completion time for this job on other machines
         if len(completion_time_list) != 0:
@@ -106,39 +113,23 @@ def gannt_chart(schedule):
             # this job has no previous operation
             other_machine_ending_time = 0
 
+        # determine the completion time of the last operation (available time) on the required machine
         try:
             lastjobidx = len(gantt_chart[machine_number]) - 1
             current_machine_available_time = gantt_chart[machine_number][lastjobidx][-1]
-        except IndexError:
+        except IndexError:  # if no jobs scheduled on this machine before throw an IndexError
             current_machine_available_time = 0
 
-        # last job completion time on current machine
-        if fInProcess:
+        # determine when the operation will start on the required machine.
+        # Check other machine times and the availability of the required machine.
+        if fProcessedBefore:  # if it was processed before
             start_time = max(other_machine_ending_time,
                              current_machine_available_time)
-        else:
+        else:  # if it was not processed before
             start_time = current_machine_available_time
         completion_time = start_time + proc_time
         gantt_chart[machine_number].append((job_number, start_time,
                                             proc_time, completion_time))
-
-        # schedule the current operation
-        # if len(gantt_chart[machine_number]) == 0:
-        #     completion_time = start_time + proc_time
-        #     gantt_chart[machine_number].append((job_number, start_time,
-        #                                         proc_time, completion_time))
-        # else:
-        #     lastjobidx = len(gantt_chart[machine_number]) - 1
-        #     # last job completion time
-        #     current_machine_available_time = gantt_chart[machine_number][lastjobidx][-1]
-        #     if fInProcess:
-        #         start_time = max(other_machine_ending_time,
-        #                          current_machine_available_time)
-        #     else:
-        #         start_time = current_machine_available_time
-        #     completion_time = start_time + proc_time
-        #     gantt_chart[machine_number].append((job_number, start_time,
-        #                                         proc_time, completion_time))
 
         if flag_print:
             print('--' * 20)
@@ -182,12 +173,21 @@ def plot_gannt(machine_times, ms):
                            facecolors=facecolors[machine_times[i][j][0]])
         bar_start += increment
 
-    ax.set_ylim(5, 65)
+    ax.set_ylim(5, 95)
     ax.set_xlim(0, ms)
     ax.set_yticks([15, 25, 35, 45, 55])
     yticklabels = ['Machine ' + str(i + 1) for i in range(numberOfMachines)]
     ax.set_yticklabels(yticklabels)
     ax.grid(True)
+
+    fakeredbar = mpatch.Rectangle((0, 0), 1, 1, fc="r")
+    fakebluebar = mpatch.Rectangle((0, 0), 1, 1, fc="b")
+    fakeyellowbar = mpatch.Rectangle((0, 0), 1, 1, fc="y")
+    fakegreenbar = mpatch.Rectangle((0, 0), 1, 1, fc="green")
+    fakegreybar = mpatch.Rectangle((0, 0), 1, 1, fc="grey")
+
+    plt.legend([fakebluebar, fakeredbar, fakeyellowbar, fakegreenbar, fakegreybar],
+               ['Job1', 'Job2', 'Job3', 'Job4', 'Job5'])
     plt.show()
 
 
@@ -271,7 +271,7 @@ def main():
 
     for gen in range(1, NGEN):
         offspring = evolve(pop)
-        pop[:] = tools.selBest(pop, 1) + tools.selBest(offspring, NPOP - 1) # use elitism
+        pop[:] = tools.selBest(pop, 1) + tools.selBest(offspring, NPOP - 1)  # use elitism
         # pop[:] = offspring  # replace population with new offspring
 
         hof.update(pop)

@@ -3,6 +3,7 @@ from __future__ import print_function, division
 import random
 import sys
 
+import matplotlib.patches as mpatch
 import matplotlib.pyplot as plt
 
 
@@ -168,7 +169,18 @@ def main():
         print("Gant Chart for Machine {}".format(machine + 1))
         print(machine_times[machine])
     print(make_span)
-    plot_gannt(machine_times, make_span)
+    # plot_gannt(machine_times, make_span)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.broken_barh([(110, 30), (150, 10)], (10, 9), facecolors='b', label='barh')
+    ax.set_xlim((0, 200))
+    ax.set_ylim((0, 50))
+    fakeredbar = mpatch.Rectangle((0, 0), 1, 1, fc="r")
+    fakebluebar = mpatch.Rectangle((0, 0), 1, 1, fc="b")
+    ax.legend([fakeredbar, fakebluebar], ['Red Data', 'Blue Data'])
+    plt.show()
+
 
 if __name__ == '__main__':
     main()
