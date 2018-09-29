@@ -2,32 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1dbf32-9499-41bb-934f-78381e5742fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai100_10.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai100_20.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai100_5.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai200_10.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai200_20.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai20_10.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai20_20.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai20_5.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai500_20.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai50_10.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai50_20.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Flowshop/tai50_5.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Openshop/best_lb_up.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Openshop/tai10_10.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Openshop/tai15_15.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Openshop/tai20_20.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Openshop/tai4_4.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Openshop/tai5_5.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/instances/Openshop/tai7_7.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CythonVersions/testing.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSSP_GA_OOP.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSSP_SA.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSSPy_GA_4PyPy.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Doppler.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GueretPrins_OSSP_Gen.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/animation_sentdex.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/example.txt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/OSSPy_GA_4PyPy.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSSP_GA.py" afterPath="$PROJECT_DIR$/OSSP_GA.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSSP_GA_OOP.py" afterPath="$PROJECT_DIR$/OSSP_GA_OOP.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSSP_SA.py" afterPath="$PROJECT_DIR$/OSSP_SA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai100_10.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai100_10.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai100_20.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai100_20.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Flowshop/tai100_5.txt" afterPath="$PROJECT_DIR$/instances/Flowshop/tai100_5.txt" />
@@ -47,7 +30,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai4_4.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai4_4.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai5_5.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai5_5.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instances/Openshop/tai7_7.txt" afterPath="$PROJECT_DIR$/instances/Openshop/tai7_7.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scratchpad.py" afterPath="$PROJECT_DIR$/scratchpad.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -62,50 +44,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OSSP_GA.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/OSSP_GA.py">
+      <file leaf-file-name="OSSP_GA_OOP.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OSSP_GA_OOP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="74" column="39" lean-forward="true" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
+            <state relative-caret-position="234">
+              <caret line="348" column="18" lean-forward="true" selection-start-line="348" selection-start-column="18" selection-end-line="348" selection-end-column="79" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
-                <element signature="e#399#2038#0" expanded="false" />
-                <element signature="e#3670#7471#0" expanded="false" />
-                <element signature="e#7574#7805#0" expanded="false" />
-                <element signature="e#7851#8065#0" expanded="false" />
-                <element signature="e#8218#9888#0" expanded="false" />
-                <element signature="e#9988#10295#0" expanded="false" />
-                <element signature="e#10325#10514#0" expanded="false" />
-                <element signature="e#10546#11061#0" expanded="false" />
-                <element signature="e#11095#11574#0" expanded="false" />
-                <element signature="e#11694#12729#0" expanded="false" />
-                <element signature="e#12777#14597#0" expanded="false" />
-                <element signature="e#18239#18327#0" expanded="false" />
+                <element signature="e#356#3336#0" expanded="false" />
+                <element signature="e#3703#4711#0" expanded="false" />
+                <element signature="e#4777#5046#0" expanded="false" />
+                <element signature="e#5105#5353#0" expanded="false" />
+                <element signature="e#5404#6127#0" expanded="false" />
+                <element signature="e#6228#7339#0" expanded="false" />
+                <element signature="e#7412#9360#0" expanded="false" />
+                <element signature="e#9429#9632#0" expanded="false" />
+                <element signature="e#9675#9885#0" expanded="false" />
+                <element signature="e#9942#10517#0" expanded="false" />
+                <element signature="e#10576#11115#0" expanded="false" />
+                <element signature="e#11168#12592#0" expanded="false" />
+                <element signature="e#16744#18620#0" expanded="false" />
+                <element signature="e#18652#20992#0" expanded="false" />
+                <element signature="e#20105#20234#0" expanded="false" />
+                <element signature="e#21037#21377#0" expanded="false" />
+                <element signature="e#21413#22240#0" expanded="false" />
+                <element signature="e#22283#22700#0" expanded="false" />
+                <element signature="e#22744#25624#0" expanded="false" />
+                <element signature="e#23701#23832#0" expanded="false" />
+                <element signature="e#23895#24033#0" expanded="false" />
+                <element signature="e#24102#24248#0" expanded="false" />
+                <element signature="e#25660#25950#0" expanded="false" />
+                <element signature="e#25990#26774#0" expanded="false" />
+                <element signature="e#26813#27171#0" expanded="false" />
+                <element signature="e#27231#27400#0" expanded="false" />
+                <element signature="e#27447#28239#0" expanded="false" />
+                <element signature="e#28275#28432#0" expanded="false" />
+                <element signature="e#28470#28581#0" expanded="false" />
+                <element signature="e#28633#28757#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crossover.py" pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/deap/tools/crossover.py">
+      <file leaf-file-name="scratchpad.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scratchpad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="225" column="21" lean-forward="false" selection-start-line="225" selection-start-column="21" selection-end-line="225" selection-end-column="21" />
+            <state relative-caret-position="947">
+              <caret line="70" column="26" lean-forward="false" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OSSP_SA.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OSSP_SA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="410">
+              <caret line="280" column="19" lean-forward="false" selection-start-line="280" selection-start-column="19" selection-end-line="280" selection-end-column="19" />
               <folding>
-                <element signature="e#276#955#0" expanded="false" />
-                <element signature="e#989#1860#0" expanded="false" />
-                <element signature="e#1895#2161#0" expanded="false" />
-                <element signature="e#2201#2925#0" expanded="false" />
-                <element signature="e#2970#4775#0" expanded="false" />
-                <element signature="e#4830#6487#0" expanded="false" />
-                <element signature="e#6520#8445#0" expanded="false" />
-                <element signature="e#8483#9343#0" expanded="false" />
-                <element signature="e#9389#10469#0" expanded="false" />
-                <element signature="e#10532#13568#0" expanded="false" />
-                <element signature="e#13729#14410#0" expanded="false" />
-                <element signature="e#14572#15911#0" expanded="false" />
-                <element signature="e#15947#16981#0" expanded="false" />
-                <element signature="e#17018#17163#0" expanded="false" />
+                <element signature="e#0#37#0" expanded="true" />
+                <element signature="e#232#12163#0" expanded="false" />
+                <element signature="e#363#1073#0" expanded="false" />
+                <element signature="e#1103#1313#0" expanded="false" />
+                <element signature="e#1345#2108#0" expanded="false" />
+                <element signature="e#2140#3479#0" expanded="false" />
+                <element signature="e#3545#5284#0" expanded="false" />
+                <element signature="e#5324#5772#0" expanded="false" />
+                <element signature="e#9955#11894#0" expanded="false" />
+                <element signature="e#11936#12163#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -114,24 +120,31 @@
       <file leaf-file-name="anneal.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Library/Python/2.7/lib/python/site-packages/simanneal/anneal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="28" column="6" lean-forward="false" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+            <state relative-caret-position="62">
+              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding>
+                <element signature="e#0#38#0" expanded="true" />
                 <element signature="e#296#405#0" expanded="false" />
-                <element signature="e#438#722#0" expanded="false" />
                 <element signature="e#1318#1652#0" expanded="false" />
-                <element signature="e#1700#1971#0" expanded="false" />
                 <element signature="e#2019#2127#0" expanded="false" />
                 <element signature="e#2181#2221#0" expanded="false" />
                 <element signature="e#2277#2320#0" expanded="false" />
-                <element signature="e#2374#2476#0" expanded="false" />
                 <element signature="e#2524#2757#0" expanded="false" />
-                <element signature="e#2800#3531#0" expanded="false" />
                 <element signature="e#3580#3810#0" expanded="false" />
-                <element signature="e#3887#5623#0" expanded="false" />
-                <element signature="e#5655#7985#0" expanded="false" />
-                <element signature="e#8036#10651#0" expanded="false" />
+                <element signature="e#9425#9497#0" expanded="false" />
+                <element signature="e#9686#9857#0" expanded="false" />
+                <element signature="e#10206#10377#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tai4_4.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/instances/Openshop/tai4_4.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -139,8 +152,28 @@
       <file leaf-file-name="tai5_5.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/instances/Openshop/tai5_5.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+            <state relative-caret-position="110">
+              <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tai7_7.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/instances/Openshop/tai7_7.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tai10_10.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/instances/Openshop/tai10_10.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="202" column="30" lean-forward="false" selection-start-line="202" selection-start-column="30" selection-end-line="202" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -159,6 +192,7 @@
     <findStrings>
       <find>301</find>
       <find>319</find>
+      <find>174</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -181,16 +215,23 @@
         <option value="$PROJECT_DIR$/CythonVersions/testing.py" />
         <option value="$PROJECT_DIR$/OSSP_GA_NoDeap.py" />
         <option value="$PROJECT_DIR$/scratchpad.py" />
+        <option value="$USER_HOME$/Downloads/CleverAlgorithms/CleverAlgorithms/src/StochasticAlgorithms/TabuSearch.py" />
+        <option value="$PROJECT_DIR$/OSSP_GA.py" />
+        <option value="$USER_HOME$/PycharmProjects/TSP/TSP_GA.py" />
+        <option value="$PROJECT_DIR$/animation.py" />
+        <option value="$PROJECT_DIR$/example.txt" />
+        <option value="$PROJECT_DIR$/Doppler.py" />
+        <option value="$USER_HOME$/Library/Python/2.7/lib/python/site-packages/simanneal/anneal.py" />
         <option value="$PROJECT_DIR$/OSSP_GA_OOP.py" />
         <option value="$PROJECT_DIR$/OSSP_SA.py" />
-        <option value="$PROJECT_DIR$/OSSP_GA.py" />
+        <option value="$PROJECT_DIR$/GueretPrins_OSSP_Gen.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1237" />
-    <option name="height" value="777" />
+    <option name="width" value="1867" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -226,8 +267,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -279,6 +320,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="CommandLine&#10;Python" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -302,61 +344,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.OSSP_GA">
-    <configuration default="false" name="OSSP_GA" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OSSPPy" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OSSP_GA.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="scratchpad" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OSSPPy" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scratchpad.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="OSSP_GA.pyx" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CythonVersions" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OSSPPy" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CythonVersions/deprecated/OSSP_GA_cy.pyx" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.GueretPrins_OSSP_Gen">
     <configuration default="false" name="OSSP_SA" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -370,6 +358,78 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="OSSPPy" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OSSP_SA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="OSSP_GA_OOP" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="OSSPPy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OSSP_GA_OOP.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="anneal" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Library/Python/2.7/lib/python/site-packages/simanneal" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="OSSPPy" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Library/Python/2.7/lib/python/site-packages/simanneal/anneal.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Doppler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="OSSPPy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Doppler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="GueretPrins_OSSP_Gen" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="OSSPPy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GueretPrins_OSSP_Gen.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -440,18 +500,20 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Python.OSSP_GA" />
-      <item index="1" class="java.lang.String" itemvalue="Python.scratchpad" />
-      <item index="2" class="java.lang.String" itemvalue="Python.OSSP_GA.pyx" />
-      <item index="3" class="java.lang.String" itemvalue="Python.OSSP_SA" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.OSSP_SA" />
+      <item index="1" class="java.lang.String" itemvalue="Python.OSSP_GA_OOP" />
+      <item index="2" class="java.lang.String" itemvalue="Python.anneal" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Doppler" />
+      <item index="4" class="java.lang.String" itemvalue="Python.GueretPrins_OSSP_Gen" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.OSSP_GA" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.GueretPrins_OSSP_Gen" />
         <item index="1" class="java.lang.String" itemvalue="Python.OSSP_SA" />
-        <item index="2" class="java.lang.String" itemvalue="Python.scratchpad" />
-        <item index="3" class="java.lang.String" itemvalue="Python.OSSP_GA.pyx" />
+        <item index="2" class="java.lang.String" itemvalue="Python.OSSP_GA_OOP" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Doppler" />
+        <item index="4" class="java.lang.String" itemvalue="Python.anneal" />
       </list>
     </recent_temporary>
   </component>
@@ -490,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525448297234</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Openshop Problemleri indirildi ve makespan yazıldı. Makespan plotlayan betik yazıldı.">
+      <created>1529762621094</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1529762621094</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -503,18 +572,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1237" height="777" extended-state="0" />
+    <frame x="0" y="23" width="1867" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26610878" sideWeight="0.49237472" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20164384" sideWeight="0.49237472" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31678832" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30948904" sideWeight="0.5046025" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30948904" sideWeight="0.49539748" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32643312" sideWeight="0.4970809" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30948904" sideWeight="0.50794977" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3088083" sideWeight="0.4920502" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32643312" sideWeight="0.4970809" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24665552" sideWeight="0.48801744" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38248175" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3823834" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24778047" sideWeight="0.51198256" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -522,7 +591,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -531,13 +600,13 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30948904" sideWeight="0.5046025" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30948904" sideWeight="0.50794977" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30948904" sideWeight="0.49539748" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32643312" sideWeight="0.4970809" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26610878" sideWeight="0.49237472" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30948904" sideWeight="0.4920502" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32643312" sideWeight="0.4970809" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27447698" sideWeight="0.49237472" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -576,6 +645,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Doppler.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="194" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OSSP_GA_OOP.py</url>
+          <line>320</line>
+          <option name="timeStamp" value="221" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -586,187 +667,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="143" />
+      <option name="time" value="223" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai4_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai5_5.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSSP_GA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#399#2038#0" expanded="false" />
-            <element signature="e#3670#7471#0" expanded="false" />
-            <element signature="e#7574#7805#0" expanded="false" />
-            <element signature="e#7851#8065#0" expanded="false" />
-            <element signature="e#8218#9888#0" expanded="false" />
-            <element signature="e#9988#10295#0" expanded="false" />
-            <element signature="e#10325#10514#0" expanded="false" />
-            <element signature="e#10546#11061#0" expanded="false" />
-            <element signature="e#11095#11574#0" expanded="false" />
-            <element signature="e#11694#12729#0" expanded="false" />
-            <element signature="e#12777#14597#0" expanded="false" />
-            <element signature="e#18239#18327#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratchpad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#226#1865#0" expanded="false" />
-            <element signature="e#226#531#1" expanded="false" />
-            <element signature="e#2787#6443#0" expanded="false" />
-            <element signature="e#2787#2900#1" expanded="false" />
-            <element signature="e#2930#2995#0" expanded="false" />
-            <element signature="e#3168#6420#0" expanded="false" />
-            <element signature="e#6537#7140#0" expanded="false" />
-            <element signature="e#7175#13394#0" expanded="false" />
-            <element signature="e#13453#13695#0" expanded="false" />
-            <element signature="e#13737#15427#0" expanded="false" />
-            <marker date="1529156728000" expanded="true" signature="7270:13394" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratchpad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#226#1865#0" expanded="false" />
-            <element signature="e#226#531#1" expanded="false" />
-            <element signature="e#2787#6443#0" expanded="false" />
-            <element signature="e#2787#2900#1" expanded="false" />
-            <element signature="e#2930#2995#0" expanded="false" />
-            <element signature="e#3168#6420#0" expanded="false" />
-            <element signature="e#6537#7140#0" expanded="false" />
-            <element signature="e#7175#13394#0" expanded="false" />
-            <element signature="e#13453#13695#0" expanded="false" />
-            <element signature="e#13737#15427#0" expanded="false" />
-            <marker date="1529156728000" expanded="true" signature="7270:13394" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratchpad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#226#1865#0" expanded="false" />
-            <element signature="e#226#531#1" expanded="false" />
-            <element signature="e#2787#6443#0" expanded="false" />
-            <element signature="e#2787#2900#1" expanded="false" />
-            <element signature="e#2930#2995#0" expanded="false" />
-            <element signature="e#3168#6420#0" expanded="false" />
-            <element signature="e#6537#7140#0" expanded="false" />
-            <element signature="e#7175#13394#0" expanded="false" />
-            <element signature="e#13453#13695#0" expanded="false" />
-            <element signature="e#13737#15427#0" expanded="false" />
-            <marker date="1529156728000" expanded="true" signature="7270:13394" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instances/Flowshop/tai20_5.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/Scheduling/flow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5874">
-          <caret line="267" column="0" lean-forward="false" selection-start-line="267" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratchpad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#226#1865#0" expanded="false" />
-            <element signature="e#226#531#1" expanded="false" />
-            <element signature="e#2787#6443#0" expanded="false" />
-            <element signature="e#2787#2900#1" expanded="false" />
-            <element signature="e#2930#2995#0" expanded="false" />
-            <element signature="e#3168#6420#0" expanded="false" />
-            <element signature="e#6537#7140#0" expanded="false" />
-            <element signature="e#7175#13394#0" expanded="false" />
-            <element signature="e#13453#13695#0" expanded="false" />
-            <element signature="e#13737#15427#0" expanded="false" />
-            <marker date="1529156728000" expanded="true" signature="7270:13394" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/Scheduling/flow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2332">
-          <caret line="267" column="0" lean-forward="true" selection-start-line="267" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instances/Flowshop/tai20_5.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/PycharmProjects/Scheduling/flow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5764">
-          <caret line="262" column="24" lean-forward="true" selection-start-line="233" selection-start-column="4" selection-end-line="262" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratchpad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1584">
-          <caret line="72" column="35" lean-forward="true" selection-start-line="72" selection-start-column="35" selection-end-line="72" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#226#1865#0" expanded="false" />
-            <element signature="e#226#531#1" expanded="false" />
-            <element signature="e#2787#6443#0" expanded="false" />
-            <element signature="e#2787#2900#1" expanded="false" />
-            <element signature="e#2930#2995#0" expanded="false" />
-            <element signature="e#3168#6420#0" expanded="false" />
-            <element signature="e#6537#7140#0" expanded="false" />
-            <element signature="e#7175#13394#0" expanded="false" />
-            <element signature="e#13453#13695#0" expanded="false" />
-            <element signature="e#13737#15427#0" expanded="false" />
-            <marker date="1529156728000" expanded="true" signature="7270:13394" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/instances/Flowshop/tai20_5.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -830,13 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OSSPy_GA_4PyPy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="56" column="19" lean-forward="false" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flow-shop/add_p.py" />
     <entry file="file://$PROJECT_DIR$/add_p2.py" />
     <entry file="file://$PROJECT_DIR$/add_p.py" />
@@ -886,20 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai10_10.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSSP_GA_OOP.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="95" column="41" lean-forward="true" selection-start-line="95" selection-start-column="41" selection-end-line="95" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/deap/creator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2649">
@@ -918,11 +802,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="e#73#970#0" expanded="false" />
-            <element signature="e#1015#1986#0" expanded="false" />
-            <element signature="e#2033#2959#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -930,9 +809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="814">
           <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-          <folding>
-            <element signature="e#5387#11065#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -940,85 +816,101 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
           <caret line="1577" column="0" lean-forward="false" selection-start-line="1577" selection-start-column="0" selection-end-line="1577" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai4_4.txt">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-98">
-          <caret line="79" column="10" lean-forward="true" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scratchpad.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch..cmdline">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="70" column="26" lean-forward="false" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/CleverAlgorithms/CleverAlgorithms/src/StochasticAlgorithms/TabuSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSSPy_GA_4PyPy.py" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/deap/tools/support.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="373" column="0" lean-forward="false" selection-start-line="373" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/PycharmProjects/TSP/TSP_GA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="320" column="4" lean-forward="false" selection-start-line="320" selection-start-column="4" selection-end-line="320" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSSP_GA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/matplotlib/animation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="1242" column="0" lean-forward="false" selection-start-line="1242" selection-start-column="0" selection-end-line="1242" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/animation_sentdex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/deap/tools/selection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Doppler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
           <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#226#1865#0" expanded="false" />
-            <element signature="e#226#531#1" expanded="false" />
-            <element signature="e#2787#6443#0" expanded="false" />
-            <element signature="e#2787#2900#1" expanded="false" />
-            <element signature="e#2930#2995#0" expanded="false" />
-            <element signature="e#3168#6420#0" expanded="false" />
-            <element signature="e#6537#7140#0" expanded="false" />
-            <element signature="e#7175#13394#0" expanded="false" />
-            <element signature="e#13453#13695#0" expanded="false" />
-            <element signature="e#13737#15427#0" expanded="false" />
-            <marker date="1529156728000" expanded="true" signature="7270:13394" ph="..." />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai7_7.txt">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/random.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Python/2.7/lib/python/site-packages/simanneal/anneal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="28" column="6" lean-forward="false" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
-          <folding>
-            <element signature="e#296#405#0" expanded="false" />
-            <element signature="e#438#722#0" expanded="false" />
-            <element signature="e#1318#1652#0" expanded="false" />
-            <element signature="e#1700#1971#0" expanded="false" />
-            <element signature="e#2019#2127#0" expanded="false" />
-            <element signature="e#2181#2221#0" expanded="false" />
-            <element signature="e#2277#2320#0" expanded="false" />
-            <element signature="e#2374#2476#0" expanded="false" />
-            <element signature="e#2524#2757#0" expanded="false" />
-            <element signature="e#2800#3531#0" expanded="false" />
-            <element signature="e#3580#3810#0" expanded="false" />
-            <element signature="e#3887#5623#0" expanded="false" />
-            <element signature="e#5655#7985#0" expanded="false" />
-            <element signature="e#8036#10651#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSSP_SA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#37#0" expanded="false" />
-            <element signature="e#123#481#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="3688">
+          <caret line="320" column="0" lean-forward="false" selection-start-line="320" selection-start-column="0" selection-end-line="320" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/deap/tools/crossover.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="225" column="21" lean-forward="false" selection-start-line="225" selection-start-column="21" selection-end-line="225" selection-end-column="21" />
+        <state relative-caret-position="308">
+          <caret line="175" column="4" lean-forward="false" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
           <folding>
             <element signature="e#276#955#0" expanded="false" />
             <element signature="e#989#1860#0" expanded="false" />
@@ -1030,41 +922,142 @@
             <element signature="e#8483#9343#0" expanded="false" />
             <element signature="e#9389#10469#0" expanded="false" />
             <element signature="e#10532#13568#0" expanded="false" />
-            <element signature="e#13729#14410#0" expanded="false" />
-            <element signature="e#14572#15911#0" expanded="false" />
-            <element signature="e#15947#16981#0" expanded="false" />
-            <element signature="e#17018#17163#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/instances/Openshop/tai5_5.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        <state relative-caret-position="110">
+          <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OSSP_GA.py">
+    <entry file="file://$USER_HOME$/Library/Python/2.7/lib/python/site-packages/simanneal/anneal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="74" column="39" lean-forward="true" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
+        <state relative-caret-position="62">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#296#405#0" expanded="false" />
+            <element signature="e#1318#1652#0" expanded="false" />
+            <element signature="e#2019#2127#0" expanded="false" />
+            <element signature="e#2181#2221#0" expanded="false" />
+            <element signature="e#2277#2320#0" expanded="false" />
+            <element signature="e#2524#2757#0" expanded="false" />
+            <element signature="e#3580#3810#0" expanded="false" />
+            <element signature="e#9425#9497#0" expanded="false" />
+            <element signature="e#9686#9857#0" expanded="false" />
+            <element signature="e#10206#10377#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai10_10.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="202" column="30" lean-forward="false" selection-start-line="202" selection-start-column="30" selection-end-line="202" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai7_7.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSSP_SA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="280" column="19" lean-forward="false" selection-start-line="280" selection-start-column="19" selection-end-line="280" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#232#12163#0" expanded="false" />
+            <element signature="e#363#1073#0" expanded="false" />
+            <element signature="e#1103#1313#0" expanded="false" />
+            <element signature="e#1345#2108#0" expanded="false" />
+            <element signature="e#2140#3479#0" expanded="false" />
+            <element signature="e#3545#5284#0" expanded="false" />
+            <element signature="e#5324#5772#0" expanded="false" />
+            <element signature="e#9955#11894#0" expanded="false" />
+            <element signature="e#11936#12163#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSSP_GA_OOP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="348" column="18" lean-forward="true" selection-start-line="348" selection-start-column="18" selection-end-line="348" selection-end-column="79" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#399#2038#0" expanded="false" />
-            <element signature="e#3670#7471#0" expanded="false" />
-            <element signature="e#7574#7805#0" expanded="false" />
-            <element signature="e#7851#8065#0" expanded="false" />
-            <element signature="e#8218#9888#0" expanded="false" />
-            <element signature="e#9988#10295#0" expanded="false" />
-            <element signature="e#10325#10514#0" expanded="false" />
-            <element signature="e#10546#11061#0" expanded="false" />
-            <element signature="e#11095#11574#0" expanded="false" />
-            <element signature="e#11694#12729#0" expanded="false" />
-            <element signature="e#12777#14597#0" expanded="false" />
-            <element signature="e#18239#18327#0" expanded="false" />
+            <element signature="e#356#3336#0" expanded="false" />
+            <element signature="e#3703#4711#0" expanded="false" />
+            <element signature="e#4777#5046#0" expanded="false" />
+            <element signature="e#5105#5353#0" expanded="false" />
+            <element signature="e#5404#6127#0" expanded="false" />
+            <element signature="e#6228#7339#0" expanded="false" />
+            <element signature="e#7412#9360#0" expanded="false" />
+            <element signature="e#9429#9632#0" expanded="false" />
+            <element signature="e#9675#9885#0" expanded="false" />
+            <element signature="e#9942#10517#0" expanded="false" />
+            <element signature="e#10576#11115#0" expanded="false" />
+            <element signature="e#11168#12592#0" expanded="false" />
+            <element signature="e#16744#18620#0" expanded="false" />
+            <element signature="e#18652#20992#0" expanded="false" />
+            <element signature="e#20105#20234#0" expanded="false" />
+            <element signature="e#21037#21377#0" expanded="false" />
+            <element signature="e#21413#22240#0" expanded="false" />
+            <element signature="e#22283#22700#0" expanded="false" />
+            <element signature="e#22744#25624#0" expanded="false" />
+            <element signature="e#23701#23832#0" expanded="false" />
+            <element signature="e#23895#24033#0" expanded="false" />
+            <element signature="e#24102#24248#0" expanded="false" />
+            <element signature="e#25660#25950#0" expanded="false" />
+            <element signature="e#25990#26774#0" expanded="false" />
+            <element signature="e#26813#27171#0" expanded="false" />
+            <element signature="e#27231#27400#0" expanded="false" />
+            <element signature="e#27447#28239#0" expanded="false" />
+            <element signature="e#28275#28432#0" expanded="false" />
+            <element signature="e#28470#28581#0" expanded="false" />
+            <element signature="e#28633#28757#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai20_20.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2021">
+          <caret line="116" column="4" lean-forward="false" selection-start-line="116" selection-start-column="4" selection-end-line="116" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai4_4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GueretPrins_OSSP_Gen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scratchpad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="947">
+          <caret line="70" column="26" lean-forward="false" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>

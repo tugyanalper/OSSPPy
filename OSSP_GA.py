@@ -69,7 +69,7 @@ for i, job in enumerate(processing_times):
     for j, ptime in enumerate(newlist):
         new_ptimes[i, j] = ptime[1]
 
-due_dates = np.sum(new_ptimes, axis=1) # due dates are equal to total processing times of jobs
+due_dates = np.sum(new_ptimes, axis=1)  # due dates are equal to total processing times of jobs
 
 # processing_times = [item for sublist in new_ptimes for item in sublist]
 processing_times = new_ptimes.flatten()
@@ -89,8 +89,12 @@ toolbox.register("population", tools.initRepeat, list, toolbox.individual)  # re
 
 
 def gannt_chart(schedule):
-    """Compiles a scheduling on the machines given a permutation of jobs 
-    with no time gap checking"""
+    """
+    Compiles a scheduling on the machines given a permutation of jobs 
+    with no time gap checking
+    :param schedule: 
+    :return: gantt_chart list of list of tuples (job number, start time, processing time, completion time)
+    """
 
     fForceOrder = True
 
@@ -187,7 +191,26 @@ def sum_of_completion_times(schedule):
 
 
 def total_tardiness(schedule):
-    return 1,
+    gannt_chrt = gannt_chart(schedule)
+
+    job_times = [[] for _ in range(numberOfJobs)]
+
+    for machine in range(numberOfMachines):
+        gannt_chrt[machine].sort(key=lambda x: x[0])
+        for idx, job in enumerate(gannt_chrt[machine]):
+            job_times[idx].append((job[0], job[3]))
+
+    ctimes = []
+    for job in range(numberOfJobs):
+        job_times[job].sort(key=lambda x: x[1])
+        ctimes.append(job_times[job][-1][-1])
+
+    tardiness = 0
+    for idx, due_date in enumerate(due_dates):
+        if ctimes[idx] > due_date:
+            tardiness += ctimes[idx] - due_date
+
+    return tardiness,
 
 
 ####################
@@ -383,13 +406,13 @@ def two_point_crossover(child1, child2):
 
 
 # register objective function with the "evaluate" alias to the toolbox
-toolbox.register("evaluate", makespan)
+toolbox.register("evaluate", total_tardiness)
 
 # register crossover function with the "mate" alias to the toolbox
 toolbox.register("mate", two_point_crossover)  # tools.cxOrdered)
 
 # register mutation function with the "mutate" alias to the toolbox
-toolbox.register("mutate", shift)
+toolbox.register("mutate", swap)
 
 # register selection function with the "select" alias to the toolbox
 toolbox.register("select", tools.selTournament, tournsize=3)
@@ -451,8 +474,8 @@ def main():
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
 
-        # pop[:] = tools.selBest(pop, 1) + tools.selBest(offspring, NPOP - 1)  # use elitism
-        pop[:] = offspring  # replace population with new offspring
+        pop[:] = tools.selBest(pop, 1) + tools.selBest(offspring, NPOP - 1)  # use elitism
+        # pop[:] = offspring  # replace population with new offspring
 
         hof.update(pop)
 
