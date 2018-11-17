@@ -5,15 +5,13 @@ import random
 import sys
 from collections import deque
 
-import matplotlib.animation as animation
 import matplotlib.patches as mpatch
 import matplotlib.pyplot as plt
 import numpy as np
 from deap import base
 from deap import creator
 from deap import tools
-
-plt.ion()
+from simanneal import Annealer
 
 
 class Problem(object):
@@ -84,6 +82,104 @@ class Problem(object):
         self.processing_times = new_ptimes.flatten()
 
 
+class SA(Annealer):
+    def __init__(self, state, problem):
+        self.problem = problem
+        super(SA, self).__init__(state)  # important!
+
+    def move(self):
+        """Swaps two operations in the route."""
+        a = random.randint(0, len(self.state) - 1)
+        b = random.randint(0, len(self.state) - 1)
+        self.state[a], self.state[b] = self.state[b], self.state[a]
+
+    def energy(self):
+        self.gannt_chrt = self.gannt_chart(self.state)
+        ctimes = []
+        for machine in range(self.problem.numberOfMachines):
+            ctimes.append(self.gannt_chrt[machine][-1][-1])
+        make_span = max(ctimes)
+        return make_span
+
+    def gannt_chart(self, state):
+        """
+        Compiles a scheduling on the machines given a permutation of jobs 
+        with no time gap checking
+        :return: gantt_chart list of list of tuples (job number, start time, processing time, completion time)
+        """
+
+        fForceOrder = True
+
+        # Note that using [[]] * m would be incorrect, as it would simply
+        # copy the same list m times (as opposed to creating m distinct lists).
+
+        gantt_chart = [[] for _ in range(self.problem.numberOfMachines)]
+
+        for operation in state:
+            machine_number = self.problem.operation_numbers_dictionary[operation][0]
+            job_number = self.problem.operation_numbers_dictionary[operation][1]
+            proc_time = self.problem.processing_times[operation]
+
+            # determine the processing times of the job on other machines
+
+            time_interval_list = []
+            for machine in range(self.problem.numberOfMachines):
+                # dont check the machine to be scheduled since one job can be scheduled only once.
+                # Check other machines if they have operations scheduled before
+                if machine != machine_number and len(gantt_chart[machine]) != 0:
+                    for j in range(len(gantt_chart[machine])):
+                        # check the  job numbers on other machines
+                        # and determine if the machine processed an operation of the job
+                        # to be scheduled now
+                        if gantt_chart[machine][j][0] == job_number:
+                            # put completion times of the job on other machines into a list
+                            s_time = gantt_chart[machine][j][1]  # start time of the job on the other machine
+                            c_time = gantt_chart[machine][j][-1]  # completion time of the job on other machine
+
+                            time_interval_list.append((s_time, c_time))
+                            time_interval_list.sort(key=lambda x: x[0])  # sort the list according to start time
+
+            # determine the completion time of the last operation (available time) on the required machine
+            num_of_jobs_on_current_machine = len(gantt_chart[machine_number])
+            if num_of_jobs_on_current_machine == 0:
+                current_machine_available_time = 0
+            else:  # buradan emin degilim
+                current_machine_available_time = gantt_chart[machine_number][-1][-1]
+
+            if not fForceOrder:
+                while True:
+                    if len(time_interval_list) != 0:
+                        for times in time_interval_list:
+                            # intersection1 = range(max(current_machine_available_time, times[0]),
+                            #                      min(current_machine_available_time + proc_time, times[1]))
+                            intersection = min(current_machine_available_time + proc_time, times[1]) - max(
+                                current_machine_available_time, times[0])
+                            if intersection > 0:
+                                current_machine_available_time = times[1]
+                                f_intersection = True
+                                break
+                        else:
+                            f_intersection = False
+                    else:
+                        break
+
+                    if not f_intersection:
+                        break
+                time_to_schedule = current_machine_available_time
+            else:
+                if len(time_interval_list) != 0:
+                    previous_completion_times = [i[-1] for i in time_interval_list]
+                    max_prev_ctimes = max(previous_completion_times)
+                    time_to_schedule = max(max_prev_ctimes, current_machine_available_time)
+                else:
+                    time_to_schedule = current_machine_available_time
+
+            completion_time = time_to_schedule + proc_time
+            gantt_chart[machine_number].append((job_number, time_to_schedule,
+                                                proc_time, completion_time))
+        return gantt_chart
+
+
 class OpenShopGA(object):
     """
     A class that solves Open Shop Scheduling Problem
@@ -91,7 +187,7 @@ class OpenShopGA(object):
 
     def __init__(self, problem, objective='makespan', mutation='swap', crossover='one_point',
                  max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.05, fprint=False, strategy='normal',
-                 animate=False, diversity_metric='distance'):
+                 fApplyDiversity=False, diversity_metric='distance', fApplySA=False):
         self.problem = problem
         self.NGEN = max_gen
         self.NPOP = pop_size
@@ -109,18 +205,15 @@ class OpenShopGA(object):
         self.area_ratio = None
         self.diversity = 1
         self.strategy = strategy
+        self.fApplyDiversity = fApplyDiversity
         self.diversity_metric = diversity_metric
         self.flag_print = fprint
         self.NDIM = self.problem.dimension
+        self.fApplySA = fApplySA
 
         self.register_functions()  # register required functions
         self.generate_population()  # create the initial population
         self.init_stats()  # get statistics about the initial population
-        self.fAnimate = animate
-        if self.fAnimate:
-            self.fig = plt.figure()
-            self.ax = self.fig.add_subplot(1, 1, 1)
-            self.animation = None
 
     # Objective Functions #
     def makespan(self, schedule):
@@ -236,11 +329,71 @@ class OpenShopGA(object):
 
         return child1, child2
 
+    def linear_order_crossover(self, child1, child2):
+        size = min(len(child1), len(child2))
+        cxpoint1 = random.randint(1, size)
+        cxpoint2 = random.randint(1, size - 1)
+        if cxpoint2 >= cxpoint1:
+            cxpoint2 += 1
+        else:  # Swap the two cx points
+            cxpoint1, cxpoint2 = cxpoint2, cxpoint1
+
+        # ss1_of_ch1 = child1[:cxpoint1]  # substring 1 of child 1
+        ss2_of_ch1 = child1[cxpoint1:cxpoint2]  # substring 2 of child 1
+        # ss3_of_ch1 = child1[cxpoint2:]  # substring 3 of child 1
+
+        # ss1_of_ch2 = child2[:cxpoint1]  # substring 1 of child 24987
+        ss2_of_ch2 = child2[cxpoint1:cxpoint2]  # substring 2 of child 2
+        # ss3_of_ch2 = child2[cxpoint2:]  # substring 3 of child 2
+
+        offspring1 = self.toolbox.clone(child1)
+        offspring1[cxpoint1:cxpoint2] = ss2_of_ch1
+
+        index = 0
+        for element in child2:
+            if element not in ss2_of_ch1:
+                if index < cxpoint1 or index >= cxpoint2:
+                    offspring1[index] = element
+                    index += 1
+                else:
+                    index = cxpoint2
+                    offspring1[index] = element
+                    index += 1
+
+        offspring2 = self.toolbox.clone(child2)
+        offspring2[cxpoint1:cxpoint2] = ss2_of_ch2
+        child1 = offspring1
+        del offspring1
+
+        index = 0
+        for element in child1:
+            if element not in ss2_of_ch2:
+                if index < cxpoint1 or index >= cxpoint2:
+                    offspring2[index] = element
+                    index += 1
+                else:
+                    index = cxpoint2
+                    offspring2[index] = element
+                    index += 1
+        child2 = offspring2
+        del offspring2
+        return child1, child2
+
+    def three_chromosome_juggling_forward(self):
+        pass
+
     # Mutation Functions #
     def swap(self, individual):
         idx1, idx2 = random.sample(range(self.NDIM), 2)
         a, b = individual.index(idx1), individual.index(idx2)
         individual[b], individual[a] = individual[a], individual[b]
+        return individual
+
+    def insert(self, individual):
+        idx1, idx2 = random.sample(range(self.NDIM), 2)  # select a random index
+        element = individual[idx1]  # get the random operation based on the index
+        del individual[idx1]
+        individual.insert(idx2, element)
         return individual
 
     def shift(self, individual):
@@ -296,6 +449,7 @@ class OpenShopGA(object):
 
     def slacktimemutation(self, schedule):
         gannt_chart = self.gannt_chart(schedule)
+        # self.plot_gannt(schedule)
         # now find the operations in the gannt chart that
         # has idle time before it is scheduled. Gannt chart
         # is a list of lists.
@@ -319,10 +473,33 @@ class OpenShopGA(object):
                     jobs_with_slack.append(operation_number)
 
         if len(jobs_with_slack) >= 2:
-            idx1, idx2 = random.sample(range(len(jobs_with_slack)), 2)
-            a, b = schedule.index(jobs_with_slack[idx1]), schedule.index(jobs_with_slack[idx2])
-            schedule[b], schedule[a] = schedule[a], schedule[b]
+            idx = random.sample(range(len(jobs_with_slack)), 1)[0]
+            a = schedule.index(jobs_with_slack[idx])
 
+            element = schedule[a]  # get the random operation based on the index
+            del schedule[a]
+            schedule.insert(0, element)
+
+            # idx1, idx2 = random.sample(range(len(jobs_with_slack)), 2)
+            # a, b = schedule.index(jobs_with_slack[idx1]), schedule.index(jobs_with_slack[idx2])
+            # schedule[b], schedule[a] = schedule[a], schedule[b]
+        # gc = self.gannt_chart(schedule)
+        # self.plot_gannt(schedule)
+
+        return schedule
+
+    def longestmachinemutation(self, schedule):
+        # gannt_chart = self.gannt_chart(schedule)
+        # ctimes = []
+        # for machine in range(self.problem.numberOfMachines):
+        #     ctimes.append(gannt_chart[machine][-1][-1])
+        # ltm = ctimes.index(max(ctimes))  # longest time machine
+        ltm = random.sample(range(self.problem.numberOfMachines),1)[0]
+        ops = [i * self.problem.numberOfMachines + (ltm) for i in range(self.problem.numberOfMachines)]
+
+        idx1, idx2 = random.sample(range(len(ops)), 2)
+        a, b = schedule.index(ops[idx1]), schedule.index(ops[idx2])
+        schedule[b], schedule[a] = schedule[a], schedule[b]
         return schedule
 
     # helper functions
@@ -415,6 +592,7 @@ class OpenShopGA(object):
         bar_width = 9
         increment = 10
         machine_times = self.gannt_chart(self.hof.items[0])
+        # machine_times = self.gannt_chart(schedule)
         for i in range(self.problem.numberOfMachines):
             for j in range(self.problem.numberOfJobs):
                 datalist = [machine_times[i][j][1:3]]
@@ -463,6 +641,14 @@ class OpenShopGA(object):
                     self.toolbox.mutate(mutant)
                     del mutant.fitness.values
 
+            if self.fApplySA:
+                # apply simulated annealing to solutions
+                for schedule in offspring:
+                    sa = SA(schedule, self.problem)
+                    sa.steps = 5
+                    schedule, _ = sa.anneal()
+                    del sa
+
             # Evaluate the individuals with an invalid fitness
             invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
             fitnesses = map(self.toolbox.evaluate, invalid_ind)
@@ -486,16 +672,11 @@ class OpenShopGA(object):
             # Update the statistics of the new population
             self.update_stats(gen)
 
-            if self.fAnimate:
-                self.animation = animation.FuncAnimation(self.fig, self.animate)
-                plt.draw()
-                plt.pause(0.01)
-
             # Check diversity of the population based on area under curve
             # if self.area_ratio < 0.5:
             #    self.apply_diversity()
-
-            self.apply_diversity()
+            if self.fApplyDiversity:
+                self.apply_diversity()
 
     def generate_population(self):
         # generate the initial population
@@ -577,6 +758,8 @@ class OpenShopGA(object):
             self.toolbox.register("mate", self.two_point_crossover)  # tools.cxOrdered
         elif self.crossover == 'ordered':
             self.toolbox.register('mate', tools.cxOrdered)
+        elif self.crossover == 'linear_order':
+            self.toolbox.register('mate', self.linear_order_crossover)
         else:
             raise ValueError('Not a valid crossover function')
 
@@ -591,6 +774,10 @@ class OpenShopGA(object):
             self.toolbox.register('mutate', self.inversion)
         elif self.mutation == 'slacktime':
             self.toolbox.register('mutate', self.slacktimemutation)
+        elif self.mutation == 'insertion':
+            self.toolbox.register('mutate', self.insert)
+        elif self.mutation == 'longesttime':
+            self.toolbox.register('mutate', self.longestmachinemutation)
         else:
             raise ValueError('Not a valid mutation function')
 
@@ -676,13 +863,6 @@ class OpenShopGA(object):
             self.MUTPB = 0.6
             # self.CXPB = 0.2
 
-    def animate(self, i):
-        x = self.logbook.select('gen')
-        y = self.logbook.select('min')
-        self.ax.clear()
-        self.ax.plot(x, y)
-        # self.ax.fill_between(x, y)
-
     def plot_fitness(self):
         x = self.logbook.select('gen')
         y = self.logbook.select('min')
@@ -697,11 +877,11 @@ class OpenShopGA(object):
 
 def main():
     # random.seed(8322)
-    ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
+    ossp_problem = Problem(filename='instances/Openshop/tai5_5.txt', instance=1)
     # print(OpenShopGA.hamming_distance(a, b))
-    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='slacktime', crossover='ordered',
-                         max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.01, fprint=True,
-                         strategy='elitist1', animate=False, diversity_metric='distance')
+    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='longesttime', crossover='linear_order',
+                         max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.6, fprint=True,
+                         strategy='elitist1', fApplyDiversity=False, diversity_metric='distance', fApplySA=False)
     ossp_ga.evolve()
     ossp_ga.print_best()
     ossp_ga.plot_gannt()
