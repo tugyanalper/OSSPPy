@@ -66,7 +66,7 @@ class Problem(object):
             self.dimension = self.numberOfJobs * self.numberOfMachines
 
             self.operation_numbers_dictionary = {i: (i % self.numberOfMachines, i // self.numberOfMachines)
-                                                 for i in range(self.dimension)}
+                                                 for i in range(self.dimension)}  # Operation : (Machine Nu., Job Nu.)
 
             self.machineOrder = [map(int, line.split()) for line in machines]
 
@@ -379,8 +379,60 @@ class OpenShopGA(object):
         del offspring2
         return child1, child2
 
-    def three_chromosome_juggling_forward(self):
-        pass
+    def three_chromosome_juggling_forward(self, child1, child2, child3):
+        offspring1 = self.toolbox.clone(child1)
+        offspring2 = self.toolbox.clone(child2)
+        c1 = self.toolbox.clone(child1)
+        c2 = self.toolbox.clone(child2)
+        c3 = self.toolbox.clone(child3)
+        for i, operation in enumerate(c3):
+            ops_tuple = self.problem.operation_numbers_dictionary[operation]
+            if sum(ops_tuple) % 2 == 0:
+                offspring1[i] = c2[0]
+                val = c2[0]
+                del c2[0]
+                idx1 = c1.index(val)
+                del c1[idx1]
+            else:
+                offspring1[i] = c1[0]
+                val = c1[0]
+                del c1[0]
+                idx2 = c2.index(val)
+                del c2[idx2]
+
+        c1 = self.toolbox.clone(child1)
+        c2 = self.toolbox.clone(child2)
+        c3 = self.toolbox.clone(child3)
+        for i, operation in enumerate(c1):
+            ops_tuple = self.problem.operation_numbers_dictionary[operation]
+            if sum(ops_tuple) % 2 == 0:
+                offspring2[i] = c2[0]
+                val = c2[0]
+                del c2[0]
+                idx1 = c3.index(val)
+                del c3[idx1]
+            else:
+                offspring2[i] = c3[0]
+                val = c3[0]
+                del c3[0]
+                idx2 = c2.index(val)
+                del c2[idx2]
+
+        child1 = offspring1
+        child2 = offspring2
+        return child1, child2, child3
+
+    def gchart_crossover(self, child1, child2):
+        schedule1 = self.operation_scheduler(child1)
+        schedule2 = self.operation_scheduler(child2)
+        holes = [[] for _ in range(self.problem.numberOfMachines)]
+        for i in range(self.problem.numberOfMachines):
+            for j in range(self.problem.numberOfJobs):
+                if schedule1[i][j] == schedule2[i][j]:
+                    holes[i].append(schedule1[i][j])
+                else:
+                    holes[i].append(0)
+        return holes
 
     # Mutation Functions #
     def swap(self, individual):
@@ -494,7 +546,7 @@ class OpenShopGA(object):
         # for machine in range(self.problem.numberOfMachines):
         #     ctimes.append(gannt_chart[machine][-1][-1])
         # ltm = ctimes.index(max(ctimes))  # longest time machine
-        ltm = random.sample(range(self.problem.numberOfMachines),1)[0]
+        ltm = random.sample(range(self.problem.numberOfMachines), 1)[0]
         ops = [i * self.problem.numberOfMachines + (ltm) for i in range(self.problem.numberOfMachines)]
 
         idx1, idx2 = random.sample(range(len(ops)), 2)
@@ -601,7 +653,7 @@ class OpenShopGA(object):
             bar_start += increment
 
         ax.set_ylim(5, 115)
-        # ax.set_xlim(0, self.hof.items[0].fitness.values[0])
+        ax.set_xlim(0, self.hof.items[0].fitness.values[0])
         ytickpos = range(15, 85, 10)
         ax.set_yticks(ytickpos)
         yticklabels = ['Machine ' + str(i + 1) for i in range(self.problem.numberOfMachines)]
@@ -628,12 +680,20 @@ class OpenShopGA(object):
             # Clone the selected individuals
             offspring = list(map(self.toolbox.clone, offspring))  # clone offsprings
 
-            # Apply crossover on the offspring
-            for child1, child2 in zip(offspring[::2], offspring[1::2]):
-                if random.random() < self.CXPB:
-                    self.toolbox.mate(child1, child2)
-                    del child1.fitness.values
-                    del child2.fitness.values
+            if self.crossover == 'TCJCF':
+                for child1, child2, child3 in zip(offspring[::3], offspring[1::3], offspring[2::3]):
+                    if random.random() < self.CXPB:
+                        self.toolbox.mate(child1, child2, child3)
+                        del child1.fitness.values
+                        del child2.fitness.values
+                        # del child3.fitness.values
+            else:
+                # Apply crossover on the offspring
+                for child1, child2 in zip(offspring[::2], offspring[1::2]):
+                    if random.random() < self.CXPB:
+                        self.toolbox.mate(child1, child2)
+                        del child1.fitness.values
+                        del child2.fitness.values
 
             # Apply mutation on the offspring
             for mutant in offspring:
@@ -760,6 +820,10 @@ class OpenShopGA(object):
             self.toolbox.register('mate', tools.cxOrdered)
         elif self.crossover == 'linear_order':
             self.toolbox.register('mate', self.linear_order_crossover)
+        elif self.crossover == 'TCJCF':
+            self.toolbox.register('mate', self.three_chromosome_juggling_forward)
+        elif self.crossover == 'gchart':
+            self.toolbox.register('mate', self.gchart_crossover)
         else:
             raise ValueError('Not a valid crossover function')
 
@@ -874,29 +938,25 @@ class OpenShopGA(object):
             if value == val:
                 return key
 
+    def operation_scheduler(self, sequence):
+        schedule = [[] for i in range(self.problem.numberOfMachines)]
+        for operation in sequence:
+            machine_no, job_no = self.problem.operation_numbers_dictionary[operation]
+            schedule[machine_no].append(operation)
+        return schedule
+
 
 def main():
     # random.seed(8322)
-    ossp_problem = Problem(filename='instances/Openshop/tai5_5.txt', instance=1)
+    ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
     # print(OpenShopGA.hamming_distance(a, b))
-    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='longesttime', crossover='linear_order',
-                         max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.6, fprint=True,
-                         strategy='elitist1', fApplyDiversity=False, diversity_metric='distance', fApplySA=False)
+    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='swap', crossover='gchart',
+                         max_gen=1000, pop_size=100, cross_pb=0.8, mut_pb=0.2, fprint=True,
+                         strategy='normal', fApplyDiversity=True, diversity_metric='distance', fApplySA=False)
     ossp_ga.evolve()
     ossp_ga.print_best()
     ossp_ga.plot_gannt()
     ossp_ga.plot_fitness()
-    # SA_Schedule = [13, 11, 3, 22, 7, 24, 15, 8, 16, 10, 21, 23, 5, 2, 20, 4, 9, 12, 18, 1, 19, 6, 17, 0, 14]  # 305
-    # SA_Schedule2 = [16, 13, 12, 5, 6, 17, 9, 14, 3, 21, 8, 20, 23, 0, 4, 22, 15, 2, 7, 11, 24, 18, 1, 10,
-    #                 19]  # 303 Force Order False
-    # SA_Schedule3 = [13, 23, 4, 22, 15, 2, 19, 8, 20, 7, 11, 18, 5, 1, 21, 14, 24, 10, 17, 6, 3, 16, 12, 9,
-    #                 0]  # 301 Force Order True
-    # SA_Schedule4 = [10, 24, 1, 18, 7, 16, 23, 12, 21, 0, 19, 8, 20, 3, 14, 6, 17, 22, 4, 2, 11, 9, 15, 13, 5]  # 307
-    # print(ossp_ga.makespan(SA_Schedule3))
-
-    # gchart = ossp_ga.gannt_chart(SA_Schedule2)
-    # for i in range(5):
-    # print(gchart[i])
 
 
 if __name__ == "__main__":
