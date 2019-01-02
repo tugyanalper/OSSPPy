@@ -271,14 +271,15 @@ class OpenShopSchedulingProblem(Annealer):
 
 
 def main():
-    filename = 'instances/Openshop/tai7_7.txt'
+    filename = 'instances/Openshop/tai10_10.txt'
     instance_number = 1
     objective = 'makespan'
     ossp = OpenShopSchedulingProblem(filename, instance_number, objective)
+    ossp.Tmax = 25000
     # auto_schedule =ossp.auto(minutes=1)
     # print(auto_schedule)
     # ossp.set_schedule(auto_schedule)
-    ossp.steps = 100000
+    ossp.steps = 20000
     # since our state is just a list, slice is the fastest way to copy
     ossp.copy_strategy = "slice"
 

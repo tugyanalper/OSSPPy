@@ -423,15 +423,34 @@ class OpenShopGA(object):
         return child1, child2, child3
 
     def gchart_crossover(self, child1, child2):
+        # convert permutation schedules to machine ordered lists
         schedule1 = self.operation_scheduler(child1)
         schedule2 = self.operation_scheduler(child2)
+
+        # create a list to hold the operations that intersect on both schedules
         holes = [[] for _ in range(self.problem.numberOfMachines)]
+        intersection = []
         for i in range(self.problem.numberOfMachines):
             for j in range(self.problem.numberOfJobs):
                 if schedule1[i][j] == schedule2[i][j]:
                     holes[i].append(schedule1[i][j])
+                    intersection.append(schedule1[i][j])
                 else:
-                    holes[i].append(0)
+                    # if no intersection then put a -1 for that place
+                    holes[i].append(-1)
+
+        # put jobs that do not intersect into leftover list
+        leftover = set(child1).difference(set(intersection))
+
+        # get the processing times of left over jobs and put them into "pt" list
+        pt = [self.problem.processing_times[operation] for operation in leftover]
+
+        # zip the leftover jobs and their corresponding processing times into "zpt" list
+        zpt = zip(leftover, pt)
+
+        # sort the zpt list in descending order according to the processing times
+        zpt.sort(reverse=True, key=lambda x: x[1])
+
         return holes
 
     # Mutation Functions #
@@ -944,6 +963,13 @@ class OpenShopGA(object):
             machine_no, job_no = self.problem.operation_numbers_dictionary[operation]
             schedule[machine_no].append(operation)
         return schedule
+
+    def ltrpom(self, zipped_list):
+        """
+         Longest Total Remaining Processing on Other Machines
+        :param zipped_list: 
+        :return: 
+        """
 
 
 def main():
