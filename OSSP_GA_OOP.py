@@ -652,6 +652,7 @@ class OpenShopGA(object):
                     # previous_completion_times = [i[-1] for i in time_interval_list]
                     # max_prev_ctimes = max(previous_completion_times)
                     # time_to_schedule = max(max_prev_ctimes, current_machine_available_time)
+                    # You made changes here
                         time_to_schedule = current_machine_available_time
                 else:
                     time_to_schedule = current_machine_available_time
