@@ -637,9 +637,22 @@ class OpenShopGA(object):
                 time_to_schedule = current_machine_available_time
             else:  # keep the order of schedule
                 if len(time_interval_list) != 0:
-                    previous_completion_times = [i[-1] for i in time_interval_list]
-                    max_prev_ctimes = max(previous_completion_times)
-                    time_to_schedule = max(max_prev_ctimes, current_machine_available_time)
+                    ###########
+                    end_time = current_machine_available_time + proc_time
+                    ###########
+
+
+                    for s_time, c_time in time_interval_list:
+                        range_set = set(range(current_machine_available_time,
+                                              current_machine_available_time + proc_time))
+                        overlap = range_set.intersection(set(range(s_time, c_time)))
+                        if overlap:
+                            current_machine_available_time = c_time
+
+                    # previous_completion_times = [i[-1] for i in time_interval_list]
+                    # max_prev_ctimes = max(previous_completion_times)
+                    # time_to_schedule = max(max_prev_ctimes, current_machine_available_time)
+                        time_to_schedule = current_machine_available_time
                 else:
                     time_to_schedule = current_machine_available_time
 
@@ -973,7 +986,7 @@ class OpenShopGA(object):
 
 
 def main():
-    # random.seed(8322)
+    random.seed(8322)
     ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
     # print(OpenShopGA.hamming_distance(a, b))
     ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='swap', crossover='gchart',
