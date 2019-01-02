@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b1dbf32-9499-41bb-934f-78381e5742fe" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/OSSPPy.iml" afterPath="$PROJECT_DIR$/.idea/OSSPPy.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSSP_GA_OOP.py" afterPath="$PROJECT_DIR$/OSSP_GA_OOP.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSSP_SA.py" afterPath="$PROJECT_DIR$/OSSP_SA.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +20,8 @@
       <file leaf-file-name="OSSP_GA_OOP.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OSSP_GA_OOP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="453" column="0" lean-forward="false" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
+            <state relative-caret-position="547">
+              <caret line="661" column="0" lean-forward="false" selection-start-line="661" selection-start-column="0" selection-end-line="661" selection-end-column="0" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
                 <element signature="e#450#776#0" expanded="false" />
@@ -52,26 +48,25 @@
                 <element signature="e#20347#20886#0" expanded="false" />
                 <element signature="e#20939#22754#0" expanded="false" />
                 <element signature="e#22812#23447#0" expanded="false" />
-                <element signature="e#23517#27563#0" expanded="false" />
-                <element signature="e#27599#29526#0" expanded="false" />
-                <element signature="e#29558#32511#0" expanded="false" />
-                <element signature="e#30886#31141#0" expanded="false" />
-                <element signature="e#31755#31884#0" expanded="false" />
-                <element signature="e#32556#32896#0" expanded="false" />
-                <element signature="e#32932#33759#0" expanded="false" />
-                <element signature="e#33802#34219#0" expanded="false" />
-                <element signature="e#34263#37707#0" expanded="false" />
-                <element signature="e#35220#35351#0" expanded="false" />
-                <element signature="e#35414#35552#0" expanded="false" />
-                <element signature="e#35621#35767#0" expanded="false" />
-                <element signature="e#37743#38033#0" expanded="false" />
-                <element signature="e#38073#38857#0" expanded="false" />
-                <element signature="e#38896#39254#0" expanded="false" />
-                <element signature="e#39314#39483#0" expanded="false" />
-                <element signature="e#39530#40322#0" expanded="false" />
-                <element signature="e#40360#40471#0" expanded="false" />
-                <element signature="e#40523#40647#0" expanded="false" />
-                <element signature="e#40702#40959#0" expanded="false" />
+                <element signature="e#28240#30167#0" expanded="false" />
+                <element signature="e#30199#33152#0" expanded="false" />
+                <element signature="e#31527#31782#0" expanded="false" />
+                <element signature="e#32396#32525#0" expanded="false" />
+                <element signature="e#33197#33537#0" expanded="false" />
+                <element signature="e#33573#34400#0" expanded="false" />
+                <element signature="e#34443#34860#0" expanded="false" />
+                <element signature="e#34904#38348#0" expanded="false" />
+                <element signature="e#35861#35992#0" expanded="false" />
+                <element signature="e#36055#36193#0" expanded="false" />
+                <element signature="e#36262#36408#0" expanded="false" />
+                <element signature="e#38384#38674#0" expanded="false" />
+                <element signature="e#38714#39498#0" expanded="false" />
+                <element signature="e#39537#39895#0" expanded="false" />
+                <element signature="e#39955#40124#0" expanded="false" />
+                <element signature="e#40171#40963#0" expanded="false" />
+                <element signature="e#41001#41112#0" expanded="false" />
+                <element signature="e#41164#41288#0" expanded="false" />
+                <element signature="e#41343#41600#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -109,7 +104,7 @@
       <file leaf-file-name="tai4_4.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/instances/Openshop/tai4_4.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
+            <state relative-caret-position="1058">
               <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
               <folding />
             </state>
@@ -534,7 +529,21 @@
       <option name="project" value="LOCAL" />
       <updated>1546158164752</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Gannt Chart Crossover Devam edildi.">
+      <created>1546440009490</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1546440009491</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Gannt Chart Crossover Devam edildi.">
+      <created>1546447337705</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1546447337705</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -552,12 +561,12 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17816092" sideWeight="0.49237472" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31678832" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30948904" sideWeight="0.50794977" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35040745" sideWeight="0.4920502" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23108809" sideWeight="0.4970809" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34951457" sideWeight="0.4920502" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23058252" sideWeight="0.4970809" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32953367" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24665552" sideWeight="0.48801744" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39441746" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43446603" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24778047" sideWeight="0.51198256" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970712" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -617,7 +626,8 @@
     <MESSAGE value="Openshop Problemleri indirildi ve makespan yazıldı. Makespan plotlayan betik yazıldı." />
     <MESSAGE value="Simmulated Annealing kullanilmaya baslandi.Slack Time 'a gore mutasyon eklendi." />
     <MESSAGE value="gannt charta bagli LRTPOM kurali uygulanmaya baslandi" />
-    <option name="LAST_COMMIT_MESSAGE" value="gannt charta bagli LRTPOM kurali uygulanmaya baslandi" />
+    <MESSAGE value="Gannt Chart Crossover Devam edildi." />
+    <option name="LAST_COMMIT_MESSAGE" value="Gannt Chart Crossover Devam edildi." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -626,21 +636,6 @@
           <url>file://$PROJECT_DIR$/Doppler.py</url>
           <line>3</line>
           <option name="timeStamp" value="194" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/OSSP_GA_OOP.py</url>
-          <line>453</line>
-          <option name="timeStamp" value="268" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/OSSP_GA_OOP.py</url>
-          <line>451</line>
-          <option name="timeStamp" value="270" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/OSSP_GA_OOP.py</url>
-          <line>445</line>
-          <option name="timeStamp" value="272" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -653,7 +648,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="273" />
+      <option name="time" value="277" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -819,14 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai4_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/instances/Openshop/tai10_10.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4646">
@@ -852,10 +839,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/instances/Openshop/tai4_4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1058">
+          <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/OSSP_GA_OOP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="453" column="0" lean-forward="false" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
+        <state relative-caret-position="547">
+          <caret line="661" column="0" lean-forward="false" selection-start-line="661" selection-start-column="0" selection-end-line="661" selection-end-column="0" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
             <element signature="e#450#776#0" expanded="false" />
@@ -882,26 +877,25 @@
             <element signature="e#20347#20886#0" expanded="false" />
             <element signature="e#20939#22754#0" expanded="false" />
             <element signature="e#22812#23447#0" expanded="false" />
-            <element signature="e#23517#27563#0" expanded="false" />
-            <element signature="e#27599#29526#0" expanded="false" />
-            <element signature="e#29558#32511#0" expanded="false" />
-            <element signature="e#30886#31141#0" expanded="false" />
-            <element signature="e#31755#31884#0" expanded="false" />
-            <element signature="e#32556#32896#0" expanded="false" />
-            <element signature="e#32932#33759#0" expanded="false" />
-            <element signature="e#33802#34219#0" expanded="false" />
-            <element signature="e#34263#37707#0" expanded="false" />
-            <element signature="e#35220#35351#0" expanded="false" />
-            <element signature="e#35414#35552#0" expanded="false" />
-            <element signature="e#35621#35767#0" expanded="false" />
-            <element signature="e#37743#38033#0" expanded="false" />
-            <element signature="e#38073#38857#0" expanded="false" />
-            <element signature="e#38896#39254#0" expanded="false" />
-            <element signature="e#39314#39483#0" expanded="false" />
-            <element signature="e#39530#40322#0" expanded="false" />
-            <element signature="e#40360#40471#0" expanded="false" />
-            <element signature="e#40523#40647#0" expanded="false" />
-            <element signature="e#40702#40959#0" expanded="false" />
+            <element signature="e#28240#30167#0" expanded="false" />
+            <element signature="e#30199#33152#0" expanded="false" />
+            <element signature="e#31527#31782#0" expanded="false" />
+            <element signature="e#32396#32525#0" expanded="false" />
+            <element signature="e#33197#33537#0" expanded="false" />
+            <element signature="e#33573#34400#0" expanded="false" />
+            <element signature="e#34443#34860#0" expanded="false" />
+            <element signature="e#34904#38348#0" expanded="false" />
+            <element signature="e#35861#35992#0" expanded="false" />
+            <element signature="e#36055#36193#0" expanded="false" />
+            <element signature="e#36262#36408#0" expanded="false" />
+            <element signature="e#38384#38674#0" expanded="false" />
+            <element signature="e#38714#39498#0" expanded="false" />
+            <element signature="e#39537#39895#0" expanded="false" />
+            <element signature="e#39955#40124#0" expanded="false" />
+            <element signature="e#40171#40963#0" expanded="false" />
+            <element signature="e#41001#41112#0" expanded="false" />
+            <element signature="e#41164#41288#0" expanded="false" />
+            <element signature="e#41343#41600#0" expanded="false" />
           </folding>
         </state>
       </provider>
