@@ -2,13 +2,14 @@ from __future__ import print_function
 
 import random
 import sys
+import numba
 
 import matplotlib.patches as mpatch
 import matplotlib.pyplot as plt
 import numpy as np
 from simanneal import Annealer
 
-
+@jit
 class OpenShopSchedulingProblem(Annealer):
     """
     Test annealer with a open shop scheduling problem.
@@ -269,7 +270,7 @@ class OpenShopSchedulingProblem(Annealer):
         make_span = max(ctimes)
         return make_span
 
-
+@jit
 def main():
     filename = 'instances/Openshop/tai10_10.txt'
     instance_number = 1

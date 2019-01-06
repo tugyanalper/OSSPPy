@@ -7,68 +7,134 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# Read processing times from the file
-def parse_problem(filename, k=1):
-    """Parse the kth instance of a Taillard problem file
+# # Read processing times from the file
+# def parse_problem(filename, k=1):
+#     """Parse the kth instance of a Taillard problem file
+#
+#     The Taillard problem files are a standard benchmark set for the problem
+#     of flow shop scheduling. They can be found online at the following address:
+#     - http://mistic.heig-vd.ch/taillard/problemes.dir/ordonnancement.dir/ordonnancement.html"""
+#
+#     with open(filename, 'r') as f:
+#         # Identify the string that separates instances
+#         problem_line = '/number of jobs, number of machines, time seed, machine seed, upper bound, lower bound :/'
+#
+#         # Strip spaces and newline characters from every line
+#         lines = map(str.strip, f.readlines())
+#
+#         # We prep the first line for later
+#         lines[0] = '/' + lines[0]
+#
+#         # We also know '/' does not appear in the files, so we can use it as
+#         #  a separator to find the right lines for the kth problem instance
+#         try:
+#             proctimes = '/'.join(lines).split(problem_line)[k].split('/machines')[0].split('/')[2:]
+#             machines = '/'.join(lines).split(problem_line)[k].split('/machines')[1].split('/')[1:]
+#         except IndexError:
+#             max_instances = len('/'.join(lines).split(problem_line)) - 1
+#             print("\nError: Instance must be within 1 and %d\n" % max_instances)
+#             sys.exit(0)
+#
+#         # Split every line based on spaces and convert each item to an int
+#         data = [map(int, line.split()) for line in proctimes]
+#
+#         machines = [map(int, line.split()) for line in machines]
+#
+#     # We return the zipped data to rotate the rows and columns, making each
+#     # item in data the durations of tasks for a particular job
+#     return data, machines
+#
+#
+# filename = 'instances/Openshop/tai5_5.txt'
+# processing_times, machines = parse_problem(filename, 1)  # a list of [job number] [machine number]
+# numberOfJobs = len(processing_times)
+# numberOfMachines = len(processing_times[0])
+# NDIM = numberOfMachines * numberOfJobs
+# # print(processing_times)
+#
+#
+# new_ptimes = []
+# for idx, job in enumerate(processing_times):
+#     newlist = sorted(zip(machines[idx], job))
+#     ptimes_inorder = [element[1] for element in newlist]
+#     new_ptimes.append(ptimes_inorder)
+#
+# numberOfMachines = 4
+# numberOfJobs = 4
+# processing_times = [item for sublist in new_ptimes for item in sublist]
+# operation_numbers_dictionary = {i: (i % numberOfMachines, i // numberOfMachines)
+#                                 for i in range(NDIM)}  # i : (machine number, job number)
 
-    The Taillard problem files are a standard benchmark set for the problem
-    of flow shop scheduling. They can be found online at the following address:
-    - http://mistic.heig-vd.ch/taillard/problemes.dir/ordonnancement.dir/ordonnancement.html"""
 
-    with open(filename, 'r') as f:
-        # Identify the string that separates instances
-        problem_line = '/number of jobs, number of machines, time seed, machine seed, upper bound, lower bound :/'
+class Problem(object):
+    """
+    Reads and parses Open Shop Scheduling Problem
+    """
 
-        # Strip spaces and newline characters from every line
-        lines = map(str.strip, f.readlines())
+    def __init__(self, filename, instance):
+        self.filename = filename
+        self.instance = instance
+        self.numberOfJobs = 0
+        self.numberOfMachines = 0
+        self.processing_times = None
+        self.operation_numbers_dictionary = None
+        self.dimension = 0
+        self.machineOrder = None
+        self.due_dates = None
+        self.parse_problem()
 
-        # We prep the first line for later
-        lines[0] = '/' + lines[0]
+    def parse_problem(self):
+        """Parse the kth instance of a Taillard problem file
 
-        # We also know '/' does not appear in the files, so we can use it as
-        #  a separator to find the right lines for the kth problem instance
-        try:
-            proctimes = '/'.join(lines).split(problem_line)[k].split('/machines')[0].split('/')[2:]
-            machines = '/'.join(lines).split(problem_line)[k].split('/machines')[1].split('/')[1:]
-        except IndexError:
-            max_instances = len('/'.join(lines).split(problem_line)) - 1
-            print("\nError: Instance must be within 1 and %d\n" % max_instances)
-            sys.exit(0)
+            The Taillard problem files are a standard benchmark set for the problem
+            of flow shop scheduling. They can be found online at the following address:
+            - http://mistic.heig-vd.ch/taillard/problemes.dir/ordonnancement.dir/ordonnancement.html"""
 
-        # Split every line based on spaces and convert each item to an int
-        data = [map(int, line.split()) for line in proctimes]
+        with open(self.filename, 'r') as f:
+            # Identify the string that separates instances
+            problem_line = '/number of jobs, number of machines, time seed, machine seed, upper bound, lower bound :/'
 
-        machines = [map(int, line.split()) for line in machines]
+            # Strip spaces and newline characters from every line
+            lines = map(str.strip, f.readlines())
 
-    # We return the zipped data to rotate the rows and columns, making each
-    # item in data the durations of tasks for a particular job
-    return data, machines
+            # We prep the first line for later
+            lines[0] = '/' + lines[0]
+
+            # We also know '/' does not appear in the files, so we can use it as
+            #  a separator to find the right lines for the kth problem instance
+            try:
+                proctimes = '/'.join(lines).split(problem_line)[self.instance].split('/machines')[0].split('/')[2:]
+                machines = '/'.join(lines).split(problem_line)[self.instance].split('/machines')[1].split('/')[1:]
+            except IndexError:
+                max_instances = len('/'.join(lines).split(problem_line)) - 1
+                print("\nError: Instance must be within 1 and %d\n" % max_instances)
+                sys.exit(0)
+
+            # Split every line based on spaces and convert each item to an int
+            self.processing_times = [map(int, line.split()) for line in proctimes]
+
+            self.numberOfJobs = len(self.processing_times)
+            self.numberOfMachines = len(self.processing_times[0])
+            self.dimension = self.numberOfJobs * self.numberOfMachines
+
+            self.operation_numbers_dictionary = {i: (i % self.numberOfMachines, i // self.numberOfMachines)
+                                                 for i in range(self.dimension)}  # Operation : (Machine Nu., Job Nu.)
+
+            self.machineOrder = [map(int, line.split()) for line in machines]
+
+            self.sort_problem()
+
+    def sort_problem(self):
+        new_ptimes = np.zeros((self.numberOfJobs, self.numberOfMachines), dtype=np.uint8)
+        for i, job in enumerate(self.processing_times):
+            newlist = sorted(zip(self.machineOrder[i], job))
+            for j, ptime in enumerate(newlist):
+                new_ptimes[i, j] = ptime[1]
+        self.due_dates = np.sum(new_ptimes, axis=1)  # tight due dates
+        self.processing_times = new_ptimes.flatten()
 
 
-filename = 'instances/Openshop/tai4_4.txt'
-processing_times, machines = parse_problem(filename, 1)  # a list of [job number] [machine number]
-numberOfJobs = len(processing_times)
-numberOfMachines = len(processing_times[0])
-NDIM = numberOfMachines * numberOfJobs
-# print(processing_times)
-
-
-new_ptimes = []
-for idx, job in enumerate(processing_times):
-    newlist = sorted(zip(machines[idx], job))
-    ptimes_inorder = [element[1] for element in newlist]
-    new_ptimes.append(ptimes_inorder)
-
-numberOfMachines = 4
-numberOfJobs = 4
-processing_times = [item for sublist in new_ptimes for item in sublist]
-operation_numbers_dictionary = {i: (i % numberOfMachines, i // numberOfMachines)
-                                for i in range(NDIM)}  # i : (machine number, job number)
-
-processing_times = [85, 85, 3, 67, 23, 74, 96, 45, 39, 56, 92, 70, 55, 78, 11, 75]
-
-# noinspection PyTypeChecker
-def gannt_chart(schedule):
+def gannt_chart(problem, schedule):
     """ 
     Compiles a scheduling on the machines given a permutation of jobs 
     with no time gap checking
@@ -78,17 +144,17 @@ def gannt_chart(schedule):
 
     # Note that using [[]] * m would be incorrect, as it would simply
     # copy the same list m times (as opposed to creating m distinct lists).
-    gantt_chart = [[] for _ in range(numberOfMachines)]
+    gantt_chart = [[] for _ in range(problem.numberOfMachines)]
 
     for operation in schedule:
-        machine_number = operation_numbers_dictionary[operation][0]
-        job_number = operation_numbers_dictionary[operation][1]
-        proc_time = processing_times[operation]
+        machine_number = problem.operation_numbers_dictionary[operation][0]
+        job_number = problem.operation_numbers_dictionary[operation][1]
+        proc_time = problem.processing_times[operation]
 
         # check if this job is being processed in any other machine
         completion_time_list = []
         time_interval_list = []
-        for machine in range(numberOfMachines):
+        for machine in range(problem.numberOfMachines):
             # dont check the machine to be scheduled since one job can be scheduled only once.
             # Check other machines
             if machine != machine_number:
@@ -125,7 +191,7 @@ def gannt_chart(schedule):
         while True:
             if len(time_interval_list) != 0:
                 for times in time_interval_list:
-                    # noinspection PyTypeChecker
+
                     intersection = range(max(current_machine_available_time, times[0]),
                                          min(current_machine_available_time + proc_time, times[1]))
                     # intersection = min(proc_time, times[1]) + 1 - max(current_machine_available_time, times[0])
@@ -147,27 +213,7 @@ def gannt_chart(schedule):
     return gantt_chart
 
 
-def check_intersection(time_interval_list, proc_time, current_machine_available_time):
-    while True:
-        if len(time_interval_list) != 0:
-            for times in time_interval_list:
-                intersection = min(current_machine_available_time + proc_time, times[1]) - max(
-                    current_machine_available_time, times[0])
-                if intersection > 0:
-                    current_machine_available_time = times[1]
-                    f_intersection = True
-                    break
-            else:
-                f_intersection = False
-        else:
-            break
-
-        if not f_intersection:
-            break
-    return current_machine_available_time
-
-
-def gannt_chart2(schedule):
+def gannt_chart2(problem, schedule):
     """Compiles a scheduling on the machines given a permutation of jobs
     with checikng time gaps"""
 
@@ -175,17 +221,17 @@ def gannt_chart2(schedule):
 
     # Note that using [[]] * m would be incorrect, as it would simply
     # copy the same list m times (as opposed to creating m distinct lists).
-    gantt_chart = [[] for _ in range(numberOfMachines)]
+    gantt_chart = [[] for _ in range(problem.numberOfMachines)]
 
     for operation in schedule:
-        machine_number = operation_numbers_dictionary[operation][0]
-        job_number = operation_numbers_dictionary[operation][1]
-        proc_time = processing_times[operation]
+        machine_number = problem.operation_numbers_dictionary[operation][0]
+        job_number = problem.operation_numbers_dictionary[operation][1]
+        proc_time = problem.processing_times[operation]
 
         # check if this job is being processed in any other machine
         completion_time_list = []
         time_interval_list = []
-        for machine in range(numberOfMachines):
+        for machine in range(problem.numberOfMachines):
             # dont check the machine to be scheduled since one job can be scheduled only once.
             # Check other machines
             if machine != machine_number:
@@ -274,17 +320,154 @@ def gannt_chart2(schedule):
     return gantt_chart
 
 
+# OSSP_GA_OOP.py icinden aldigin class fonksiyonu
+def gannt_chart3(problem, schedule, flag):
+    """
+    Compiles a scheduling on the machines given a permutation of jobs 
+    with the option of time gap checking
+    """
+
+    fForceOrder = flag
+
+    # Note that using [[]] * m would be incorrect, as it would simply
+    # copy the same list m times (as opposed to creating m distinct lists).
+
+    gantt_chart = [[] for _ in range(problem.numberOfMachines)]
+
+    for operation in schedule:
+        machine_number = problem.operation_numbers_dictionary[operation][0]
+        job_number = problem.operation_numbers_dictionary[operation][1]
+        proc_time = problem.processing_times[operation]
+
+        # determine the processing times of the job on other machines
+        time_interval_list = []
+        for machine in range(problem.numberOfMachines):
+            # dont check the machine to be scheduled since one job can be scheduled only once.
+            # Check other machines if they have operations scheduled before
+            if machine != machine_number and len(gantt_chart[machine]) != 0:
+                for j in range(len(gantt_chart[machine])):
+                    # check the  job numbers on other machines
+                    # and determine if the machine processed an operation of the job
+                    # to be scheduled now
+                    if gantt_chart[machine][j][0] == job_number:
+                        # put completion times of the job on other machines into a list
+                        s_time = gantt_chart[machine][j][1]  # start time of the job on the other machine
+                        c_time = gantt_chart[machine][j][-1]  # completion time of the job on other machine
+
+                        time_interval_list.append((s_time, c_time))
+                        time_interval_list.sort(key=lambda x: x[0])  # sort the list according to start time
+
+        # determine the completion time of the last operation (available time) on the required machine
+        num_of_jobs_on_current_machine = len(gantt_chart[machine_number])
+
+        if not fForceOrder:  # eger kromozomdaki makinelere dusen is sirasi gozetilmeyecekse
+            # first find the gaps on the machine to be scheduled
+            if num_of_jobs_on_current_machine != 0:
+                gaps = []
+                current_starttime2check = 0
+                for op in (gantt_chart[machine_number]):
+                    if current_starttime2check == op[1]:  # if start time equals to the operations start time
+                        current_starttime2check = op[3]  # then update start time to operations end time
+                    else:
+                        gap = (current_starttime2check, op[1])
+                        gaps.append(gap)
+                        current_starttime2check = op[3]
+
+                # if there are gaps on the current machine check if it can be scheduled on those gaps
+                if gaps:
+                    for space in gaps:
+                        current_machine_available_time = space[0]
+                        # Narrow the gap by checking other machines
+                        time_to_schedule = check_overlap_othmach(time_interval_list, proc_time,
+                                                                 current_machine_available_time)
+
+                        space = (time_to_schedule, space[1])
+                        # check if there is an overlap on the current machine
+                        foverlap = check_overlap_curmach(space, proc_time)
+
+                        if not foverlap:  # if there is no overlap on the current machine
+                            time_to_schedule = space[0]
+                            break
+                        else:  # if operation doesnt fit in the gap
+                            #  replace the available time with last operation's end time
+                            current_machine_available_time = gantt_chart[machine_number][-1][-1]
+                            time_to_schedule = check_overlap_othmach(time_interval_list, proc_time,
+                                                                     current_machine_available_time)
+
+                else:  # if there are no gaps
+                    current_machine_available_time = gantt_chart[machine_number][-1][-1]
+                    time_to_schedule = check_overlap_othmach(time_interval_list, proc_time,
+                                                             current_machine_available_time)
+            else:
+                current_machine_available_time = 0
+                time_to_schedule = check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time)
+        else:  # keep the order of schedule
+            if num_of_jobs_on_current_machine == 0:
+                current_machine_available_time = 0
+            else:  # buradan emin degilim
+                current_machine_available_time = gantt_chart[machine_number][-1][-1]  # for order enforced case
+            time_to_schedule = check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time)
+
+        completion_time = time_to_schedule + proc_time
+        gantt_chart[machine_number].append((job_number, time_to_schedule,
+                                            proc_time, completion_time))
+        gantt_chart[machine_number].sort(key=lambda x: x[1])
+    return gantt_chart
+
+
+def check_intersection(time_interval_list, proc_time, current_machine_available_time):
+    while True:
+        if len(time_interval_list) != 0:
+            for times in time_interval_list:
+                intersection = min(current_machine_available_time + proc_time, times[1]) - max(
+                    current_machine_available_time, times[0])
+                if intersection > 0:
+                    current_machine_available_time = times[1]
+                    f_intersection = True
+                    break
+            else:
+                f_intersection = False
+        else:
+            break
+
+        if not f_intersection:
+            break
+    return current_machine_available_time
+
+
+def check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time):
+    if len(time_interval_list) != 0:
+        for s_time, c_time in time_interval_list:
+            range_set = set(range(current_machine_available_time,
+                                  current_machine_available_time + proc_time + 1))
+            overlap = range_set.intersection(set(range(s_time, c_time)))
+            if overlap:
+                current_machine_available_time = c_time
+
+        time_to_schedule = current_machine_available_time
+    else:
+        time_to_schedule = current_machine_available_time
+
+    return time_to_schedule
+
+
+def check_overlap_curmach(gap, proc_time):
+    if gap[1] - gap[0] < proc_time:
+        return True
+    return False
+
+
 # Define Objective Function
-def makespan(schedule):
-    gannt_chrt = gannt_chart(schedule)
+def makespan(problem, schedule, flag):
+    gannt_chrt = gannt_chart3(problem, schedule, flag)
     ctimes = []
-    for machine in range(numberOfMachines):
+    for machine in range(problem.numberOfMachines):
         ctimes.append(gannt_chrt[machine][-1][-1])
     make_span = max(ctimes)
     return gannt_chrt, make_span  # return a tuple for compatibility
 
 
-def plot_gannt(machine_times, ms):
+def plot_gannt(machine_times, problem, ms):
     """
         Plots the gannt chart of the given gannt chart data structure
         :param machine_times: gannt chart data structure
@@ -299,8 +482,8 @@ def plot_gannt(machine_times, ms):
     bar_start = 10
     bar_width = 9
     increment = 10
-    for i in range(numberOfMachines):
-        for j in range(numberOfJobs):
+    for i in range(problem.numberOfMachines):
+        for j in range(problem.numberOfJobs):
             datalist = [machine_times[i][j][1:3]]
             ax.broken_barh(datalist, (bar_start, bar_width),
                            facecolors=facecolors[machine_times[i][j][0]])
@@ -310,7 +493,7 @@ def plot_gannt(machine_times, ms):
     ax.set_xlim(0, ms)
     ytickpos = range(15, 85, 10)
     ax.set_yticks(ytickpos)
-    yticklabels = ['Machine ' + str(i + 1) for i in range(numberOfMachines)]
+    yticklabels = ['Machine ' + str(i + 1) for i in range(problem.numberOfMachines)]
     ax.set_yticklabels(yticklabels)
     ax.grid(True)
 
@@ -329,14 +512,16 @@ def plot_gannt(machine_times, ms):
 
 def main():
     # random.seed(1250)
-    schedule = np.array([15, 4, 13, 7, 12, 6, 2, 11, 10, 0, 14, 1, 3, 8, 9, 5])
+    ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
+    schedule = np.array([12, 0, 7, 2, 6, 3, 13, 5, 1, 4, 14, 11, 10, 15, 8, 9])
+    fForceOrder = False
     print(schedule)
-    gchart, ms = makespan(schedule)
+    gchart, ms = makespan(ossp_problem, schedule, fForceOrder)
 
     for idx, machine in enumerate(gchart):
         print('Machine ' + str(idx), ' :', machine)
     print(ms)
-    plot_gannt(gchart, ms)
+    plot_gannt(gchart, ossp_problem, ms)
 
 
 if __name__ == '__main__':

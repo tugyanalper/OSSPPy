@@ -187,7 +187,7 @@ class OpenShopGA(object):
 
     def __init__(self, problem, objective='makespan', mutation='swap', crossover='one_point',
                  max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.05, fprint=False, strategy='normal',
-                 fApplyDiversity=False, diversity_metric='distance', fApplySA=False):
+                 fApplyDiversity=False, diversity_metric='distance', fApplySA=False, fForceOrder=False):
         self.problem = problem
         self.NGEN = max_gen
         self.NPOP = pop_size
@@ -210,6 +210,7 @@ class OpenShopGA(object):
         self.flag_print = fprint
         self.NDIM = self.problem.dimension
         self.fApplySA = fApplySA
+        self.fForceOrder = fForceOrder
 
         self.register_functions()  # register required functions
         self.generate_population()  # create the initial population
@@ -574,11 +575,100 @@ class OpenShopGA(object):
         return schedule
 
     # helper functions
-    def gannt_chart(self, schedule):
-        """Compiles a scheduling on the machines given a permutation of jobs 
-        with no time gap checking"""
+    # def gannt_chart(self, schedule):
+    #     """Compiles a scheduling on the machines given a permutation of jobs
+    #     with no time gap checking"""
+    #
+    #     fForceOrder = True
+    #
+    #     # Note that using [[]] * m would be incorrect, as it would simply
+    #     # copy the same list m times (as opposed to creating m distinct lists).
+    #
+    #     gantt_chart = [[] for _ in range(self.problem.numberOfMachines)]
+    #
+    #     for operation in schedule:
+    #         machine_number = self.problem.operation_numbers_dictionary[operation][0]
+    #         job_number = self.problem.operation_numbers_dictionary[operation][1]
+    #         proc_time = self.problem.processing_times[operation]
+    #
+    #         # determine the processing times of the job on other machines
+    #         time_interval_list = []
+    #         for machine in range(self.problem.numberOfMachines):
+    #             # dont check the machine to be scheduled since one job can be scheduled only once.
+    #             # Check other machines if they have operations scheduled before
+    #             if machine != machine_number and len(gantt_chart[machine]) != 0:
+    #                 for j in range(len(gantt_chart[machine])):
+    #                     # check the  job numbers on other machines
+    #                     # and determine if the machine processed an operation of the job
+    #                     # to be scheduled now
+    #                     if gantt_chart[machine][j][0] == job_number:
+    #                         # put completion times of the job on other machines into a list
+    #                         s_time = gantt_chart[machine][j][1]  # start time of the job on the other machine
+    #                         c_time = gantt_chart[machine][j][-1]  # completion time of the job on other machine
+    #
+    #                         time_interval_list.append((s_time, c_time))
+    #                         time_interval_list.sort(key=lambda x: x[0])  # sort the list according to start time
+    #
+    #         # determine the completion time of the last operation (available time) on the required machine
+    #         num_of_jobs_on_current_machine = len(gantt_chart[machine_number])
+    #         if num_of_jobs_on_current_machine == 0:
+    #             current_machine_available_time = 0
+    #         else:  # buradan emin degilim
+    #             current_machine_available_time = gantt_chart[machine_number][-1][-1]
+    #
+    #         if not fForceOrder:
+    #             while True:
+    #                 if len(time_interval_list) != 0:
+    #                     for times in time_interval_list:
+    #                         # intersection1 = range(max(current_machine_available_time, times[0]),
+    #                         #                      min(current_machine_available_time + proc_time, times[1]))
+    #                         intersection = min(current_machine_available_time + proc_time, times[1]) - max(
+    #                             current_machine_available_time, times[0])
+    #                         if intersection > 0:
+    #                             current_machine_available_time = times[1]
+    #                             f_intersection = True
+    #                             break
+    #                     else:
+    #                         f_intersection = False
+    #                 else:
+    #                     break
+    #
+    #                 if not f_intersection:
+    #                     break
+    #             time_to_schedule = current_machine_available_time
+    #         else:  # keep the order of schedule
+    #             if len(time_interval_list) != 0:
+    #                 ###########
+    #                 end_time = current_machine_available_time + proc_time
+    #                 ###########
+    #
+    #
+    #                 for s_time, c_time in time_interval_list:
+    #                     range_set = set(range(current_machine_available_time,
+    #                                           current_machine_available_time + proc_time))
+    #                     overlap = range_set.intersection(set(range(s_time, c_time)))
+    #                     if overlap:
+    #                         current_machine_available_time = c_time
+    #
+    #                         # previous_completion_times = [i[-1] for i in time_interval_list]
+    #                         # max_prev_ctimes = max(previous_completion_times)
+    #                         # time_to_schedule = max(max_prev_ctimes, current_machine_available_time)
+    #                         # You made changes here
+    #                     time_to_schedule = current_machine_available_time
+    #             else:
+    #                 time_to_schedule = current_machine_available_time
+    #
+    #         completion_time = time_to_schedule + proc_time
+    #         gantt_chart[machine_number].append((job_number, time_to_schedule,
+    #                                             proc_time, completion_time))
+    #     return gantt_chart
 
-        fForceOrder = True
+    # OSSP_GA_OOP.py icinden aldigin class fonksiyonu
+    def gannt_chart(self, schedule):
+        """
+        Compiles a scheduling on the machines given a permutation of jobs 
+        with the option of time gap checking
+        """
 
         # Note that using [[]] * m would be incorrect, as it would simply
         # copy the same list m times (as opposed to creating m distinct lists).
@@ -610,57 +700,83 @@ class OpenShopGA(object):
 
             # determine the completion time of the last operation (available time) on the required machine
             num_of_jobs_on_current_machine = len(gantt_chart[machine_number])
-            if num_of_jobs_on_current_machine == 0:
-                current_machine_available_time = 0
-            else:  # buradan emin degilim
-                current_machine_available_time = gantt_chart[machine_number][-1][-1]
 
-            if not fForceOrder:
-                while True:
-                    if len(time_interval_list) != 0:
-                        for times in time_interval_list:
-                            # intersection1 = range(max(current_machine_available_time, times[0]),
-                            #                      min(current_machine_available_time + proc_time, times[1]))
-                            intersection = min(current_machine_available_time + proc_time, times[1]) - max(
-                                current_machine_available_time, times[0])
-                            if intersection > 0:
-                                current_machine_available_time = times[1]
-                                f_intersection = True
-                                break
+            if not self.fForceOrder:  # eger kromozomdaki makinelere dusen is sirasi gozetilmeyecekse
+                # first find the gaps on the machine to be scheduled
+                if num_of_jobs_on_current_machine != 0:
+                    gaps = []
+                    current_starttime2check = 0
+                    for op in (gantt_chart[machine_number]):
+                        if current_starttime2check == op[1]:  # if start time equals to the operations start time
+                            current_starttime2check = op[3]  # then update start time to operations end time
                         else:
-                            f_intersection = False
-                    else:
-                        break
+                            gap = (current_starttime2check, op[1])
+                            gaps.append(gap)
+                            current_starttime2check = op[3]
 
-                    if not f_intersection:
-                        break
-                time_to_schedule = current_machine_available_time
-            else:  # keep the order of schedule
-                if len(time_interval_list) != 0:
-                    ###########
-                    end_time = current_machine_available_time + proc_time
-                    ###########
+                    # if there are gaps on the current machine check if it can be scheduled on those gaps
+                    if gaps:
+                        for space in gaps:
+                            current_machine_available_time = space[0]
+                            # Narrow the gap by checking other machines
+                            time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
+                                                                     current_machine_available_time)
 
+                            space = (time_to_schedule, space[1])
+                            # check if there is an overlap on the current machine
+                            foverlap = self.check_overlap_curmach(space, proc_time)
 
-                    for s_time, c_time in time_interval_list:
-                        range_set = set(range(current_machine_available_time,
-                                              current_machine_available_time + proc_time))
-                        overlap = range_set.intersection(set(range(s_time, c_time)))
-                        if overlap:
-                            current_machine_available_time = c_time
+                            if not foverlap:  # if there is no overlap on the current machine
+                                time_to_schedule = space[0]
+                                break
+                            else:  # if operation doesnt fit in the gap
+                                #  replace the available time with last operation's end time
+                                current_machine_available_time = gantt_chart[machine_number][-1][-1]
+                                time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
+                                                                         current_machine_available_time)
 
-                    # previous_completion_times = [i[-1] for i in time_interval_list]
-                    # max_prev_ctimes = max(previous_completion_times)
-                    # time_to_schedule = max(max_prev_ctimes, current_machine_available_time)
-                    # You made changes here
-                        time_to_schedule = current_machine_available_time
+                    else:  # if there are no gaps
+                        current_machine_available_time = gantt_chart[machine_number][-1][-1]
+                        time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
+                                                                 current_machine_available_time)
                 else:
-                    time_to_schedule = current_machine_available_time
+                    current_machine_available_time = 0
+                    time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
+                                                             current_machine_available_time)
+            else:  # keep the order of schedule
+                if num_of_jobs_on_current_machine == 0:
+                    current_machine_available_time = 0
+                else:  # buradan emin degilim
+                    current_machine_available_time = gantt_chart[machine_number][-1][-1]  # for order enforced case
+                time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time)
 
             completion_time = time_to_schedule + proc_time
             gantt_chart[machine_number].append((job_number, time_to_schedule,
                                                 proc_time, completion_time))
+            gantt_chart[machine_number].sort(key=lambda x: x[1])
         return gantt_chart
+
+    @staticmethod
+    def check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time):
+        if len(time_interval_list) != 0:
+            for s_time, c_time in time_interval_list:
+                range_set = set(range(current_machine_available_time,
+                                      current_machine_available_time + proc_time + 1))
+                overlap = range_set.intersection(set(range(s_time, c_time)))
+                if overlap:
+                    current_machine_available_time = c_time
+
+            time_to_schedule = current_machine_available_time
+        else:
+            time_to_schedule = current_machine_available_time
+
+        return time_to_schedule
+
+    @staticmethod
+    def check_overlap_curmach(gap, proc_time):
+        if gap[1] - gap[0] < proc_time:
+            return True
+        return False
 
     def plot_gannt(self):
         """
@@ -987,12 +1103,12 @@ class OpenShopGA(object):
 
 
 def main():
-    random.seed(8322)
+    # random.seed(8322)
     ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
     # print(OpenShopGA.hamming_distance(a, b))
-    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='swap', crossover='gchart',
-                         max_gen=1000, pop_size=100, cross_pb=0.8, mut_pb=0.2, fprint=True,
-                         strategy='normal', fApplyDiversity=True, diversity_metric='distance', fApplySA=False)
+    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='swap', crossover='one_point',
+                         max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.2, fprint=True,
+                         strategy='elitist1', fApplyDiversity=False, diversity_metric='distance', fApplySA=False)
     ossp_ga.evolve()
     ossp_ga.print_best()
     ossp_ga.plot_gannt()
