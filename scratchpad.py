@@ -5,6 +5,7 @@ import sys
 import matplotlib.patches as mpatch
 import matplotlib.pyplot as plt
 import numpy as np
+from copy import deepcopy
 
 
 # # Read processing times from the file
@@ -95,7 +96,7 @@ class Problem(object):
             problem_line = '/number of jobs, number of machines, time seed, machine seed, upper bound, lower bound :/'
 
             # Strip spaces and newline characters from every line
-            lines = map(str.strip, f.readlines())
+            lines = list(map(str.strip, f.readlines()))
 
             # We prep the first line for later
             lines[0] = '/' + lines[0]
@@ -111,7 +112,7 @@ class Problem(object):
                 sys.exit(0)
 
             # Split every line based on spaces and convert each item to an int
-            self.processing_times = [map(int, line.split()) for line in proctimes]
+            self.processing_times = [list(map(int, line.split())) for line in proctimes]
 
             self.numberOfJobs = len(self.processing_times)
             self.numberOfMachines = len(self.processing_times[0])
@@ -328,6 +329,7 @@ def gannt_chart3(problem, schedule, flag):
     """
 
     fForceOrder = flag
+    fRepair = False
 
     # Note that using [[]] * m would be incorrect, as it would simply
     # copy the same list m times (as opposed to creating m distinct lists).
@@ -387,6 +389,7 @@ def gannt_chart3(problem, schedule, flag):
 
                         if not foverlap:  # if there is no overlap on the current machine
                             time_to_schedule = space[0]
+                            fRepair = True
                             break
                         else:  # if operation doesnt fit in the gap
                             #  replace the available time with last operation's end time
@@ -412,6 +415,8 @@ def gannt_chart3(problem, schedule, flag):
         gantt_chart[machine_number].append((job_number, time_to_schedule,
                                             proc_time, completion_time))
         gantt_chart[machine_number].sort(key=lambda x: x[1])
+    if fRepair:
+        repair_chromosome(schedule, gantt_chart, problem)
     return gantt_chart
 
 
@@ -455,6 +460,24 @@ def check_overlap_curmach(gap, proc_time):
     if gap[1] - gap[0] < proc_time:
         return True
     return False
+
+
+def repair_chromosome(schedule, gchart, problem):
+    original = []
+    for operation in schedule:
+        original.append(problem.operation_numbers_dictionary[operation])
+
+    chart = deepcopy(gchart)
+    for machine_number, operations in enumerate(chart):
+        for operation_number, operation in enumerate(operations):
+            operation = ((machine_number, operation[0]), operation[1], operation[2], operation[3])
+            chart[machine_number][operation_number] = operation
+    dtype = [('operation','object'), ('start_time','int'), ('proc_time','int'),('end_time','int') ]
+    chart = np.array(chart, dtype=dtype)
+    chart = chart.reshape((1, problem.numberOfMachines * problem.numberOfJobs))
+    chart = np.sort(chart, order='start_time')
+
+
 
 
 # Define Objective Function
@@ -514,6 +537,7 @@ def main():
     # random.seed(1250)
     ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
     schedule = np.array([12, 0, 7, 2, 6, 3, 13, 5, 1, 4, 14, 11, 10, 15, 8, 9])
+    # schedule = np.array([12, 7, 2, 11, 6, 1, 0, 13, 9, 5, 14, 3, 10, 15, 4, 8]) #repaired
     fForceOrder = False
     print(schedule)
     gchart, ms = makespan(ossp_problem, schedule, fForceOrder)

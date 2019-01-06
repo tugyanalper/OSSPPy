@@ -43,7 +43,7 @@ class Problem(object):
             problem_line = '/number of jobs, number of machines, time seed, machine seed, upper bound, lower bound :/'
 
             # Strip spaces and newline characters from every line
-            lines = map(str.strip, f.readlines())
+            lines = list(map(str.strip, f.readlines()))
 
             # We prep the first line for later
             lines[0] = '/' + lines[0]
@@ -59,7 +59,7 @@ class Problem(object):
                 sys.exit(0)
 
             # Split every line based on spaces and convert each item to an int
-            self.processing_times = [map(int, line.split()) for line in proctimes]
+            self.processing_times = [list(map(int, line.split())) for line in proctimes]
 
             self.numberOfJobs = len(self.processing_times)
             self.numberOfMachines = len(self.processing_times[0])
@@ -1104,7 +1104,7 @@ class OpenShopGA(object):
 
 def main():
     # random.seed(8322)
-    ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
+    ossp_problem = Problem(filename='instances/Openshop/tai5_5.txt', instance=1)
     # print(OpenShopGA.hamming_distance(a, b))
     ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='swap', crossover='one_point',
                          max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.2, fprint=True,
