@@ -6,6 +6,7 @@ import matplotlib.patches as mpatch
 import matplotlib.pyplot as plt
 import numpy as np
 from copy import deepcopy
+from itertools import groupby, chain
 
 
 # # Read processing times from the file
@@ -463,21 +464,40 @@ def check_overlap_curmach(gap, proc_time):
 
 
 def repair_chromosome(schedule, gchart, problem):
-    original = []
-    for operation in schedule:
-        original.append(problem.operation_numbers_dictionary[operation])
+    elements = problem.numberOfMachines * problem.numberOfJobs
+    original = np.empty(elements, dtype=object)
+    for i, operation in enumerate(schedule):
+        original[i] = problem.operation_numbers_dictionary[operation]
 
     chart = deepcopy(gchart)
-    for machine_number, operations in enumerate(chart):
-        for operation_number, operation in enumerate(operations):
-            operation = ((machine_number, operation[0]), operation[1], operation[2], operation[3])
-            chart[machine_number][operation_number] = operation
-    dtype = [('operation','object'), ('start_time','int'), ('proc_time','int'),('end_time','int') ]
-    chart = np.array(chart, dtype=dtype)
-    chart = chart.reshape((1, problem.numberOfMachines * problem.numberOfJobs))
+    dtype = [('operation', 'object'), ('start_time', 'int'), ('proc_time', 'int'), ('end_time', 'int')]
+    chart = np.array(chart, dtype=dtype).flatten()
+
+    for i, operation in enumerate(chart):
+        machine_number = i // problem.numberOfMachines
+        operation = ((machine_number, operation[0]), operation[1], operation[2], operation[3])
+        chart[i] = operation
+
     chart = np.sort(chart, order='start_time')
+    chart = [list(grp) for k, grp in groupby(chart, key=lambda x: x[1])]
+    repaired = list(map(extract, chart))
+    indices = {b: i for i, b in enumerate(original)}
+    for sublist in repaired:
+        if len(sublist) > 1:
+            sublist.sort(key=lambda x: indices[x])
+    del indices, chart, original, elements
+    repaired = list(chain(*repaired))
+    rev_dict = {value: key for key, value in problem.operation_numbers_dictionary.items()}
+    repaired = list(map(lambda x: rev_dict[x], repaired))
+    return repaired
 
 
+def extract(sublist):
+    if len(sublist) > 1:
+        operations = [operation[0] for operation in sublist]
+    else:
+        operations = [sublist[0][0]]
+    return operations
 
 
 # Define Objective Function
