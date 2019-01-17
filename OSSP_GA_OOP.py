@@ -12,6 +12,8 @@ from deap import base
 from deap import creator
 from deap import tools
 from simanneal import Annealer
+from copy import deepcopy
+from itertools import chain, groupby
 
 
 class Problem(object):
@@ -185,6 +187,9 @@ class OpenShopGA(object):
     A class that solves Open Shop Scheduling Problem
     """
 
+    #######################
+    # ClassInitialization #
+    #######################
     def __init__(self, problem, objective='makespan', mutation='swap', crossover='one_point',
                  max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.05, fprint=False, strategy='normal',
                  fApplyDiversity=False, diversity_metric='distance', fApplySA=False, fForceOrder=False):
@@ -201,7 +206,6 @@ class OpenShopGA(object):
         self.toolbox = None
         self.logbook = None
         self.stats = None
-        self.due_dates = None
         self.area_ratio = None
         self.diversity = 1
         self.strategy = strategy
@@ -216,7 +220,9 @@ class OpenShopGA(object):
         self.generate_population()  # create the initial population
         self.init_stats()  # get statistics about the initial population
 
+    #######################
     # Objective Functions #
+    #######################
     def makespan(self, schedule):
         gannt_chrt = self.gannt_chart(schedule)
         ctimes = []
@@ -254,7 +260,9 @@ class OpenShopGA(object):
 
         return tardiness,
 
+    #######################
     # Crossover Functions #
+    #######################
     @staticmethod
     def one_point_crossover(child1, child2):
         """Executes a one point crossover on the input :term:`sequence` individuals.
@@ -268,8 +276,9 @@ class OpenShopGA(object):
             This function uses the :func:`~random.randint` function from the
             python base :mod:`random` module.
             """
+
         size = min(len(child1), len(child2))
-        cxpoint = random.randint(1, size - 1)
+        cxpoint = np.random.randint(1, size - 1, dtype=np.uint8)
         # child1[cxpoint:], child2[cxpoint:] = child2[cxpoint:], child1[cxpoint:]
         of1 = child1[:cxpoint]
         of2 = child2[:cxpoint]
@@ -425,36 +434,36 @@ class OpenShopGA(object):
 
     def gchart_crossover(self, child1, child2):
         # convert permutation schedules to machine ordered lists
-        schedule1 = self.operation_scheduler(child1)
-        schedule2 = self.operation_scheduler(child2)
+        schedule1 = self.operation_scheduler(np.array(child1, dtype=np.uint8))
+        schedule2 = self.operation_scheduler(np.array(child2, dtype=np.uint8))
 
-        # create a list to hold the operations that intersect on both schedules
-        holes = [[] for _ in range(self.problem.numberOfMachines)]
-        intersection = []
-        for i in range(self.problem.numberOfMachines):
-            for j in range(self.problem.numberOfJobs):
-                if schedule1[i][j] == schedule2[i][j]:
-                    holes[i].append(schedule1[i][j])
-                    intersection.append(schedule1[i][j])
-                else:
-                    # if no intersection then put a -1 for that place
-                    holes[i].append(-1)
+        i = self.problem.numberOfMachines  # number of machines
+        j = self.problem.numberOfJobs  # number of jobs
 
-        # put jobs that do not intersect into leftover list
-        leftover = set(child1).difference(set(intersection))
+        holes = np.full((i, j), -1)  # create a numpy array full of -1s
 
-        # get the processing times of left over jobs and put them into "pt" list
-        pt = [self.problem.processing_times[operation] for operation in leftover]
+        # create a logical index where elements of the schedules are equal
+        log_ind = np.equal(schedule1, schedule2)
 
-        # zip the leftover jobs and their corresponding processing times into "zpt" list
-        zpt = zip(leftover, pt)
+        # replace the values at holes array with schedule1 values
+        # where logical index is True
+        np.putmask(holes, log_ind, schedule1)
 
-        # sort the zpt list in descending order according to the processing times
-        zpt.sort(reverse=True, key=lambda x: x[1])
+        # reshape processing time array and find the columnwise sum and
+        # repeat (tile) it for the number of machines(i)
+        proc_time_arr = self.problem.processing_times.reshape((i, j)).T
+        sumarr = np.tile(np.sum(proc_time_arr, axis=0), (i, 1))
+
+        # find the remaining processing times by subtracting processing times
+        # element by element from the tiled sum array
+        remaining_proc_times = sumarr - proc_time_arr
+        del sumarr, proc_time_arr
 
         return holes
 
+    ######################
     # Mutation Functions #
+    ######################
     def swap(self, individual):
         idx1, idx2 = random.sample(range(self.NDIM), 2)
         a, b = individual.index(idx1), individual.index(idx2)
@@ -664,6 +673,9 @@ class OpenShopGA(object):
     #     return gantt_chart
 
     # OSSP_GA_OOP.py icinden aldigin class fonksiyonu
+    ######################
+    # Important Functions#
+    ######################
     def gannt_chart(self, schedule):
         """
         Compiles a scheduling on the machines given a permutation of jobs 
@@ -672,6 +684,7 @@ class OpenShopGA(object):
 
         # Note that using [[]] * m would be incorrect, as it would simply
         # copy the same list m times (as opposed to creating m distinct lists).
+        fRepair = False
 
         gantt_chart = [[] for _ in range(self.problem.numberOfMachines)]
 
@@ -720,7 +733,7 @@ class OpenShopGA(object):
                             current_machine_available_time = space[0]
                             # Narrow the gap by checking other machines
                             time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
-                                                                     current_machine_available_time)
+                                                                          current_machine_available_time)
 
                             space = (time_to_schedule, space[1])
                             # check if there is an overlap on the current machine
@@ -728,98 +741,37 @@ class OpenShopGA(object):
 
                             if not foverlap:  # if there is no overlap on the current machine
                                 time_to_schedule = space[0]
+                                fRepair = True
                                 break
                             else:  # if operation doesnt fit in the gap
                                 #  replace the available time with last operation's end time
                                 current_machine_available_time = gantt_chart[machine_number][-1][-1]
                                 time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
-                                                                         current_machine_available_time)
+                                                                              current_machine_available_time)
 
                     else:  # if there are no gaps
                         current_machine_available_time = gantt_chart[machine_number][-1][-1]
                         time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
-                                                                 current_machine_available_time)
+                                                                      current_machine_available_time)
                 else:
                     current_machine_available_time = 0
                     time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
-                                                             current_machine_available_time)
+                                                                  current_machine_available_time)
             else:  # keep the order of schedule
                 if num_of_jobs_on_current_machine == 0:
                     current_machine_available_time = 0
                 else:  # buradan emin degilim
                     current_machine_available_time = gantt_chart[machine_number][-1][-1]  # for order enforced case
-                time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time)
+                time_to_schedule = self.check_overlap_othmach(time_interval_list, proc_time,
+                                                              current_machine_available_time)
 
             completion_time = time_to_schedule + proc_time
             gantt_chart[machine_number].append((job_number, time_to_schedule,
                                                 proc_time, completion_time))
             gantt_chart[machine_number].sort(key=lambda x: x[1])
+        if fRepair:
+            self.repair_chromosome(schedule, gantt_chart)
         return gantt_chart
-
-    @staticmethod
-    def check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time):
-        if len(time_interval_list) != 0:
-            for s_time, c_time in time_interval_list:
-                range_set = set(range(current_machine_available_time,
-                                      current_machine_available_time + proc_time + 1))
-                overlap = range_set.intersection(set(range(s_time, c_time)))
-                if overlap:
-                    current_machine_available_time = c_time
-
-            time_to_schedule = current_machine_available_time
-        else:
-            time_to_schedule = current_machine_available_time
-
-        return time_to_schedule
-
-    @staticmethod
-    def check_overlap_curmach(gap, proc_time):
-        if gap[1] - gap[0] < proc_time:
-            return True
-        return False
-
-    def plot_gannt(self):
-        """
-        Plots the gannt chart of the given gannt chart data structure
-        :return: None 
-        """
-        plt.ioff()
-        fig, ax = plt.subplots()
-        facecolors = ('blue', 'red', 'yellow', 'green', 'grey', 'azure', 'plum',
-                      'wheat', 'brown', 'chocolate', 'coral', 'cyan', 'darkblue',
-                      'gold', 'khaki', 'lavender', 'lime', 'magenta', 'orange',
-                      'pink')
-        bar_start = 10
-        bar_width = 9
-        increment = 10
-        machine_times = self.gannt_chart(self.hof.items[0])
-        # machine_times = self.gannt_chart(schedule)
-        for i in range(self.problem.numberOfMachines):
-            for j in range(self.problem.numberOfJobs):
-                datalist = [machine_times[i][j][1:3]]
-                ax.broken_barh(datalist, (bar_start, bar_width),
-                               facecolors=facecolors[machine_times[i][j][0]])
-            bar_start += increment
-
-        ax.set_ylim(5, 115)
-        ax.set_xlim(0, self.hof.items[0].fitness.values[0])
-        ytickpos = range(15, 85, 10)
-        ax.set_yticks(ytickpos)
-        yticklabels = ['Machine ' + str(i + 1) for i in range(self.problem.numberOfMachines)]
-        ax.set_yticklabels(yticklabels)
-        ax.grid(True)
-
-        fakeredbar = mpatch.Rectangle((0, 0), 1, 1, fc="r")
-        fakebluebar = mpatch.Rectangle((0, 0), 1, 1, fc="b")
-        fakeyellowbar = mpatch.Rectangle((0, 0), 1, 1, fc="y")
-        fakegreenbar = mpatch.Rectangle((0, 0), 1, 1, fc="green")
-        fakegreybar = mpatch.Rectangle((0, 0), 1, 1, fc="grey")
-        fakeazurebar = mpatch.Rectangle((0, 0), 1, 1, fc='azure')
-        fakeplumbar = mpatch.Rectangle((0, 0), 1, 1, fc='plum')
-
-        plt.legend([fakebluebar, fakeredbar, fakeyellowbar, fakegreenbar, fakegreybar, fakeazurebar, fakeplumbar],
-                   ['Job1', 'Job2', 'Job3', 'Job4', 'Job5', 'Job6', 'Job7'])
-        plt.show()
 
     def evolve(self):
         for gen in range(1, self.NGEN):
@@ -886,6 +838,121 @@ class OpenShopGA(object):
             #    self.apply_diversity()
             if self.fApplyDiversity:
                 self.apply_diversity()
+
+    def plot_gannt(self):
+        """
+        Plots the gannt chart of the given gannt chart data structure
+        :return: None 
+        """
+        fig, ax = plt.subplots()
+        facecolors = ('blue', 'red', 'yellow', 'green', 'grey', 'azure', 'plum',
+                      'wheat', 'brown', 'chocolate', 'coral', 'cyan', 'darkblue',
+                      'gold', 'khaki', 'lavender', 'lime', 'magenta', 'orange',
+                      'pink')
+        bar_start = 10
+        bar_width = 9
+        increment = 10
+        machine_times = self.gannt_chart(self.hof.items[0])
+        # machine_times = self.gannt_chart(schedule)
+        for i in range(self.problem.numberOfMachines):
+            for j in range(self.problem.numberOfJobs):
+                datalist = [machine_times[i][j][1:3]]
+                ax.broken_barh(datalist, (bar_start, bar_width),
+                               facecolors=facecolors[machine_times[i][j][0]])
+            bar_start += increment
+
+        ax.set_ylim(5, 115)
+        ax.set_xlim(0, self.hof.items[0].fitness.values[0])
+        ytickpos = range(15, 85, 10)
+        ax.set_yticks(ytickpos)
+        yticklabels = ['Machine ' + str(i + 1) for i in range(self.problem.numberOfMachines)]
+        ax.set_yticklabels(yticklabels)
+        ax.grid(True)
+
+        fakeredbar = mpatch.Rectangle((0, 0), 1, 1, fc="r")
+        fakebluebar = mpatch.Rectangle((0, 0), 1, 1, fc="b")
+        fakeyellowbar = mpatch.Rectangle((0, 0), 1, 1, fc="y")
+        fakegreenbar = mpatch.Rectangle((0, 0), 1, 1, fc="green")
+        fakegreybar = mpatch.Rectangle((0, 0), 1, 1, fc="grey")
+        fakeazurebar = mpatch.Rectangle((0, 0), 1, 1, fc='azure')
+        fakeplumbar = mpatch.Rectangle((0, 0), 1, 1, fc='plum')
+
+        plt.legend([fakebluebar, fakeredbar, fakeyellowbar, fakegreenbar, fakegreybar, fakeazurebar, fakeplumbar],
+                   ['Job1', 'Job2', 'Job3', 'Job4', 'Job5', 'Job6', 'Job7'])
+        plt.show()
+
+    def repair_chromosome(self, schedule, gchart):
+        elements = self.problem.numberOfMachines * self.problem.numberOfJobs
+        original = np.empty(elements, dtype=object)
+        for i, operation in enumerate(schedule):
+            original[i] = self.problem.operation_numbers_dictionary[operation]
+
+        chart = deepcopy(gchart)
+        dtype = [('operation', 'object'), ('start_time', 'int'), ('proc_time', 'int'), ('end_time', 'int')]
+        chart = np.array(chart, dtype=dtype).flatten()
+
+        for i, operation in enumerate(chart):
+            machine_number = i // self.problem.numberOfMachines
+            operation = ((machine_number, operation[0]), operation[1], operation[2], operation[3])
+            chart[i] = operation
+
+        chart = np.sort(chart, order='start_time')
+        chart = [list(grp) for k, grp in groupby(chart, key=lambda x: x[1])]
+        repaired = list(map(self.extract, chart))
+        indices = {b: i for i, b in enumerate(original)}
+        for sublist in repaired:
+            if len(sublist) > 1:
+                sublist.sort(key=lambda x: indices[x])
+        del indices, chart, elements
+        repaired = list(chain(*repaired))
+        rev_dict = {value: key for key, value in self.problem.operation_numbers_dictionary.items()}
+        repaired = list(map(lambda x: rev_dict[x], repaired))
+        repaired = array.array('B', repaired)
+        schedule[:] = repaired[:]
+        return repaired
+
+    ######################
+    #  Helper Functions  #
+    ######################
+    @staticmethod
+    def check_overlap_othmach(time_interval_list, proc_time, current_machine_available_time):
+        if len(time_interval_list) != 0:
+            for s_time, c_time in time_interval_list:
+                range_set = set(range(current_machine_available_time,
+                                      current_machine_available_time + proc_time + 1))
+                overlap = range_set.intersection(set(range(s_time, c_time)))
+                if overlap:
+                    current_machine_available_time = c_time
+
+            time_to_schedule = current_machine_available_time
+        else:
+            time_to_schedule = current_machine_available_time
+
+        return time_to_schedule
+
+    @staticmethod
+    def check_overlap_curmach(gap, proc_time):
+        if gap[1] - gap[0] < proc_time:
+            return True
+        return False
+
+    @staticmethod
+    def extract(sublist):
+        if len(sublist) > 1:
+            operations = [operation[0] for operation in sublist]
+        else:
+            operations = [sublist[0][0]]
+        return operations
+
+    @staticmethod
+    def hamming_distance(a, b):
+        distance = 0
+        if len(a) == len(b):
+            for i in range(len(a)):
+                if a[i] != b[i]:
+                    distance += 1
+
+        return distance
 
     def generate_population(self):
         # generate the initial population
@@ -1039,16 +1106,6 @@ class OpenShopGA(object):
         diversity = (1 / (self.NPOP * self.NDIM * (self.NPOP - 1))) * outer_sum
         return diversity
 
-    @staticmethod
-    def hamming_distance(a, b):
-        distance = 0
-        if len(a) == len(b):
-            for i in range(len(a)):
-                if a[i] != b[i]:
-                    distance += 1
-
-        return distance
-
     def apply_diversity(self):  # mu
         if self.diversity_metric == 'distance':
             diversity = self.diversity
@@ -1088,11 +1145,11 @@ class OpenShopGA(object):
                 return key
 
     def operation_scheduler(self, sequence):
-        schedule = [[] for i in range(self.problem.numberOfMachines)]
-        for operation in sequence:
-            machine_no, job_no = self.problem.operation_numbers_dictionary[operation]
-            schedule[machine_no].append(operation)
-        return schedule
+        temp = np.array(list(map(lambda x: self.problem.operation_numbers_dictionary[x][0], sequence)),
+                        dtype=np.int8)
+        arg_sort = np.argsort(temp)
+        schedule = np.take(sequence, arg_sort)
+        return schedule.reshape((self.problem.numberOfMachines, self.problem.numberOfJobs))
 
     def ltrpom(self, zipped_list):
         """
@@ -1104,15 +1161,20 @@ class OpenShopGA(object):
 
 def main():
     # random.seed(8322)
-    ossp_problem = Problem(filename='instances/Openshop/tai5_5.txt', instance=1)
-    # print(OpenShopGA.hamming_distance(a, b))
-    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='swap', crossover='one_point',
-                         max_gen=1000, pop_size=80, cross_pb=0.8, mut_pb=0.2, fprint=True,
-                         strategy='elitist1', fApplyDiversity=False, diversity_metric='distance', fApplySA=False)
+    ossp_problem = Problem(filename='instances/Openshop/tai4_4.txt', instance=1)
+
+    # Objective options = makespan, total_tardiness. total_completion_time
+    # Crossover options = one_point, two_point, ordered, linear_order, TCJCF, gchart
+    # Mutation options = swap, shift, shuffle, inversion, slack_time, insertion, longesttime
+    # strategy options = normal, elitist1, elitist2
+    ossp_ga = OpenShopGA(ossp_problem, objective='makespan', mutation='swap', crossover='gchart',
+                         max_gen=100, pop_size=80, cross_pb=0.8, mut_pb=0.2, fprint=True,
+                         strategy='elitist1', fApplyDiversity=False, diversity_metric='distance',
+                         fApplySA=False)
     ossp_ga.evolve()
     ossp_ga.print_best()
-    ossp_ga.plot_gannt()
-    ossp_ga.plot_fitness()
+    # ossp_ga.plot_gannt()
+    # ossp_ga.plot_fitness()
 
 
 if __name__ == "__main__":

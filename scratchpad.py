@@ -485,7 +485,7 @@ def repair_chromosome(schedule, gchart, problem):
     for sublist in repaired:
         if len(sublist) > 1:
             sublist.sort(key=lambda x: indices[x])
-    del indices, chart, original, elements
+    del indices, chart, elements
     repaired = list(chain(*repaired))
     rev_dict = {value: key for key, value in problem.operation_numbers_dictionary.items()}
     repaired = list(map(lambda x: rev_dict[x], repaired))
